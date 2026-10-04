@@ -78,6 +78,30 @@ const related = relatedProjects(project.slug);
           ))}
         </ol>
 
+        {(project.repoUrl || project.demoUrl || project.dataSource) && (
+          <>
+            <h2 style="margin-top:2rem;">Project links</h2>
+            <ul style="list-style:none;margin:0;padding:0;">
+              {project.repoUrl && (
+                <li style="border-top:1px solid var(--c-rule);padding:0.5rem 0;">
+                  <a href={project.repoUrl} rel="noopener">Source code</a>
+                </li>
+              )}
+              {project.demoUrl && (
+                <li style="border-top:1px solid var(--c-rule);padding:0.5rem 0;">
+                  <a href={project.demoUrl} rel="noopener">Live dashboard</a>
+                </li>
+              )}
+              {project.dataSource && (
+                <li style="border-top:1px solid var(--c-rule);padding:0.5rem 0;color:var(--c-body);">
+                  <span style="display:block;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-muted);">Data</span>
+                  {project.dataSource}
+                </li>
+              )}
+            </ul>
+          </>
+        )}
+
         <h2 style="margin-top:2rem;">Tools</h2>
         <ul style="list-style:none;margin:0;padding:0;">
           {project.tools.map((t) => (

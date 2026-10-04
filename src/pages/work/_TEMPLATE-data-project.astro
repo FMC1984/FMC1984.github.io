@@ -1,0 +1,119 @@
+---
+/* ---------------------------------------------------------------------------
+ * TEMPLATE — data / analytics case study.
+ *
+ * Astro ignores files starting with "_", so this never becomes a page.
+ * To use it:
+ *   1. Copy to src/pages/work/<your-slug>.astro
+ *   2. Add the matching entry to src/data/projects.ts with discipline: 'data'
+ *   3. Change getProject('...') below to your slug
+ *
+ * The section order is deliberately different from the search case studies.
+ * A data project is judged on whether the reasoning holds up, so the structure
+ * is: what was asked -> what data -> how -> what was found -> what it does NOT
+ * support. The Limitations section is not optional; leaving it out is the most
+ * common way a portfolio analysis reads as junior.
+ * ------------------------------------------------------------------------- */
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { getProject } from '../../data/projects';
+
+const project = getProject('REPLACE-WITH-SLUG');
+
+const sections = [
+  { id: 'question', label: 'The question' },
+  { id: 'data', label: 'The data' },
+  { id: 'method', label: 'Method' },
+  { id: 'analysis', label: 'Analysis' },
+  { id: 'findings', label: 'Findings' },
+  { id: 'limitations', label: 'Limitations' },
+  { id: 'reproduce', label: 'Reproduce it' },
+  { id: 'why-it-matters', label: 'Why it matters' },
+];
+---
+
+<CaseStudyLayout project={project} sections={sections}>
+  <section class="cs-section" id="question">
+    <h2>The question</h2>
+    <p>
+      State the decision this analysis was meant to inform, in one short paragraph.
+      Not "I analyzed the dataset" — what would someone do differently depending on
+      the answer?
+    </p>
+  </section>
+
+  <section class="cs-section" id="data">
+    <h2>The data</h2>
+    <p>Where it came from, how much of it, and what shape it's in.</p>
+    <ul>
+      <li><strong>Source:</strong> name it and link it if public</li>
+      <li><strong>Period:</strong> date range covered</li>
+      <li><strong>Grain:</strong> what one row represents</li>
+      <li><strong>Size:</strong> rows and columns</li>
+      <li><strong>Known issues:</strong> missing values, duplicates, inconsistent categories</li>
+    </ul>
+    <p>
+      Say what you had to clean and why. Cleaning decisions are analysis decisions —
+      showing them is more convincing than a tidy result that appeared from nowhere.
+    </p>
+  </section>
+
+  <section class="cs-section" id="method">
+    <h2>Method</h2>
+    <p>
+      The approach and why it fits the question. Name the techniques plainly
+      (aggregation, cohort comparison, regression, time series) and say what you
+      considered and rejected.
+    </p>
+  </section>
+
+  <section class="cs-section" id="analysis">
+    <h2>Analysis</h2>
+    <p>Walk through the steps. Include the actual query where it carries weight:</p>
+    <pre style="overflow-x:auto;background:var(--c-sand);border:1px solid var(--c-rule);border-radius:3px;padding:1rem;font-size:0.85rem;"><code>-- Example: keep snippets short and load-bearing.
+SELECT category, COUNT(*) AS n, AVG(value) AS avg_value
+FROM observations
+WHERE observed_at >= '2026-01-01'
+GROUP BY category
+ORDER BY n DESC;</code></pre>
+    <p>
+      Charts go here as figures. Use the ImagePlaceholder component until the real
+      export exists — see the DCHP case study for the pattern.
+    </p>
+  </section>
+
+  <section class="cs-section" id="findings">
+    <h2>Findings</h2>
+    <p>Lead with the answer to the question, then support it.</p>
+    <ul>
+      <li>Finding, with the number that supports it</li>
+      <li>Finding, with the number that supports it</li>
+    </ul>
+    <p>
+      State effect sizes, not just direction. "Churn was 3.2 points higher" beats
+      "churn was higher."
+    </p>
+  </section>
+
+  <section class="cs-section" id="limitations">
+    <h2>Limitations</h2>
+    <p>
+      What this analysis does not establish. Confounders, sample limits, the
+      correlation you are not claiming is causal, the period that may not generalize.
+      This section is what separates an analyst from someone who makes charts.
+    </p>
+  </section>
+
+  <section class="cs-section" id="reproduce">
+    <h2>Reproduce it</h2>
+    <p>
+      Link the repository and say what's in it: queries, notebook, data dictionary,
+      how to run it. Set <code>repoUrl</code> in projects.ts and it also appears in
+      the sidebar.
+    </p>
+  </section>
+
+  <section class="cs-section" id="why-it-matters">
+    <h2>Why it matters</h2>
+    <p>What this shows about how you work. Keep it to a short paragraph.</p>
+  </section>
+</CaseStudyLayout>

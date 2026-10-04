@@ -11,8 +11,16 @@
  * See README.md -> "Adding a case study".
  */
 
+/**
+ * Which practice a project belongs to. Drives the grouping on /work/ so the
+ * site can speak to a search audience and a data/analytics audience without
+ * either one wading through the other's projects.
+ */
+export type Discipline = 'search' | 'data';
+
 export interface Project {
   slug: string;
+  discipline: Discipline;
   /** Short label used on cards and in nav contexts. */
   title: string;
   /** Full headline used as the <h1> on the case study page. */
@@ -39,11 +47,18 @@ export interface Project {
   imageDir: string;
   /** ISO date for schema. Use the date the case study was published/updated. */
   published: string;
+  /** Optional link to the source repository (data/technical projects). */
+  repoUrl?: string;
+  /** Optional link to a live dashboard or demo. */
+  demoUrl?: string;
+  /** Optional dataset provenance, e.g. 'Public — CMS Open Payments 2024'. */
+  dataSource?: string;
 }
 
 export const projects: Project[] = [
   {
     slug: 'douglas-county-housing-partnership',
+    discipline: 'search',
     seoTitle: 'Douglas County Housing Partnership Website',
     metaDescription: 'Strategy through implementation for a housing nonprofit: information architecture, UX, SEO and a custom website I designed and built.',
     title: 'Douglas County Housing Partnership',
@@ -61,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'ai-visibility-platform',
+    discipline: 'search',
     seoTitle: 'Designing an AI Visibility Platform',
     metaDescription: 'A product concept for measuring AI search visibility in multifamily: entity consistency, citation presence and renter question coverage.',
     title: 'AI Visibility Platform',
@@ -85,6 +101,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'multifamily-search-optimization',
+    discipline: 'search',
     seoTitle: 'Multifamily SEO at Portfolio Scale',
     metaDescription: 'How I run search optimization across dozens of multifamily property websites at once: onboarding, implementation, local search and QA.',
     title: 'Multifamily Search Optimization',
@@ -108,6 +125,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'geo-aeo-search-strategy',
+    discipline: 'search',
     seoTitle: 'A Working Method for GEO and AEO',
     metaDescription: 'My method for GEO and AEO: entity clarity, fact consistency across sources, answer-retrievable content and citation measurement.',
     title: 'GEO / AEO Search Strategy',
@@ -126,6 +144,20 @@ export const projects: Project[] = [
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
+
+export const searchProjects = projects.filter((p) => p.discipline === 'search');
+export const dataProjects = projects.filter((p) => p.discipline === 'data');
+
+export const disciplineLabels: Record<Discipline, { title: string; intro: string }> = {
+  search: {
+    title: 'Search & AI visibility',
+    intro: 'Strategy, implementation and measurement across SEO, GEO and AEO.',
+  },
+  data: {
+    title: 'Data & analytics',
+    intro: 'Analysis, SQL and measurement work — the question, the method, and what the data actually supported.',
+  },
+};
 
 export function getProject(slug: string): Project {
   const found = projects.find((p) => p.slug === slug);

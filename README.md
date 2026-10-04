@@ -218,12 +218,24 @@ sentence.
 
 Two steps.
 
+Case studies come in two kinds, set by the `discipline` field:
+`'search'` (SEO/GEO/AEO work) and `'data'` (analysis, SQL, dashboards). The
+`/work/` page groups them under separate headings, so a hiring manager looking
+for one doesn't have to read through the other. A group with no projects in it
+doesn't render at all.
+
+For a data project, start from `src/pages/work/_TEMPLATE-data-project.astro`.
+It has the right section order for an analysis — question, data, method,
+analysis, findings, **limitations**, reproduce — rather than the
+strategy-and-execution order the search case studies use.
+
 **Step 1 — add the metadata.** In `src/data/projects.ts`, add an entry to the
 `projects` array:
 
 ```ts
 {
   slug: 'new-project-slug',            // becomes /work/new-project-slug/
+  discipline: 'data',                  // 'search' or 'data'
   title: 'Short Card Title',
   headline: 'The Full Headline Used As The Page H1',
   seoTitle: 'Short Title For Search Results',   // keep under ~45 characters
@@ -237,6 +249,11 @@ Two steps.
   featured: true,                       // true = also shown on the homepage
   imageDir: '/images/projects/new-project-slug',
   published: '2026-10-04',              // ISO date, used in structured data
+
+  // optional, mainly for data projects — these render in the sidebar
+  repoUrl: 'https://github.com/FMC1984/...',
+  demoUrl: 'https://...',              // live dashboard
+  dataSource: 'Public — NYC TLC trip records, 2024',
 }
 ```
 
