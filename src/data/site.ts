@@ -13,10 +13,9 @@ export const site = {
   location: 'United States',
 
   /* --- contact ------------------------------------------------------------ */
-  // Gmail plus-addressing: delivers to melodynbloom@gmail.com, but tags every
-  // message that came from the portfolio. If this address ever starts getting
-  // spam, you know it was scraped from here — filter or change the tag.
-  email: 'melodynbloom+portfolio@gmail.com',
+  // Interim address. Replace with tina@tinawilliamson.com once the domain is
+  // registered and email forwarding is set up — see README, "Custom domain".
+  email: 'melodynbloom@gmail.com',
   linkedin: 'https://www.linkedin.com/in/tina-williamson/',
   github: 'https://github.com/FMC1984',
 
