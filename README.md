@@ -1,4 +1,4 @@
-# tinawilliamson.github.io
+# FMC1984.github.io
 
 Portfolio site for **Tina Williamson** — SEO, GEO & AI Search Strategist.
 
@@ -110,8 +110,8 @@ The workflow at `.github/workflows/deploy.yml` builds the site and publishes it
 on every push to `main`. One-time setup:
 
 1. **Create the repository.** For a user site it must be named exactly
-   `tinawilliamson.github.io` (replace `tinawilliamson` with your GitHub
-   username if it differs — the name must match your username).
+   `FMC1984.github.io` — a user site only works when the repository name
+   matches your GitHub username (`FMC1984`).
 
 2. **Push this project to it:**
 
@@ -120,7 +120,7 @@ on every push to `main`. One-time setup:
    git add .
    git commit -m "Initial portfolio site"
    git branch -M main
-   git remote add origin https://github.com/tinawilliamson/tinawilliamson.github.io.git
+   git remote add origin https://github.com/FMC1984/FMC1984.github.io.git
    git push -u origin main
    ```
 
@@ -130,7 +130,7 @@ on every push to `main`. One-time setup:
    publish.
 
 4. **Watch the first run** under the **Actions** tab. It takes a minute or two.
-   When it finishes, the site is live at <https://tinawilliamson.github.io>.
+   When it finishes, the site is live at <https://FMC1984.github.io>.
 
 After that, every `git push` to `main` redeploys automatically.
 
@@ -150,22 +150,22 @@ Two values in `astro.config.mjs` control every URL the site generates.
 **Current configuration — user site (the default, and what you want):**
 
 ```js
-site: 'https://tinawilliamson.github.io',
+site: 'https://FMC1984.github.io',
 base: '/',
 ```
 
-Use this when the repository is named `tinawilliamson.github.io`. The site is
+Use this when the repository is named `FMC1984.github.io`. The site is
 served from the domain root.
 
 **Project site** — repository named something else, e.g.
-`github.com/tinawilliamson/portfolio`:
+`github.com/FMC1984/portfolio`:
 
 ```js
-site: 'https://tinawilliamson.github.io',
+site: 'https://FMC1984.github.io',
 base: '/portfolio',          // must match the repository name exactly
 ```
 
-The site is then served from `https://tinawilliamson.github.io/portfolio/`.
+The site is then served from `https://FMC1984.github.io/portfolio/`.
 
 You don't need to touch anything else. Every internal link and asset path in the
 site goes through the `url()` helper in `src/lib/paths.ts`, which prefixes
@@ -336,7 +336,7 @@ GitHub Pages supports custom domains without changing anything structural.
    ```
 
    For a subdomain (`www.tinawilliamson.com`) create one `CNAME` record pointing
-   to `tinawilliamson.github.io`.
+   to `FMC1984.github.io`.
 
 2. **In the repository**, go to **Settings → Pages → Custom domain**, enter the
    domain and save. GitHub creates a `CNAME` file in the published site. Tick

@@ -1,8 +1,8 @@
-# robots.txt — tinawilliamson.github.io
+# robots.txt — fmc1984.github.io
 # Everything on this site is intended to be crawlable, including by AI
 # crawlers: the point of the site is to be discoverable and quotable.
 
 User-agent: *
 Allow: /
 
-Sitemap: https://tinawilliamson.github.io/sitemap-index.xml
+Sitemap: https://fmc1984.github.io/sitemap-index.xml

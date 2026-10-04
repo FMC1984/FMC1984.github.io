@@ -17,11 +17,11 @@ export const site = {
   /* --- contact: placeholders until confirmed ------------------------------ */
   email: 'hello@tinawilliamson.com', // TODO: confirm the address to publish
   linkedin: 'https://www.linkedin.com/in/tinawilliamson/', // TODO: confirm exact URL
-  github: 'https://github.com/tinawilliamson', // TODO: confirm exact URL
+  github: 'https://github.com/FMC1984', // TODO: confirm exact URL
 
   /* --- deployment --------------------------------------------------------- */
   // Keep in sync with `site` in astro.config.mjs.
-  origin: 'https://tinawilliamson.github.io',
+  origin: 'https://fmc1984.github.io',
 
   /* --- social card -------------------------------------------------------- */
   // Add a 1200x630 PNG at public/images/og/og-default.png, then flip
