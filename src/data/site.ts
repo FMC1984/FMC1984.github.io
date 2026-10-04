@@ -10,7 +10,7 @@ export const site = {
     'Tina Williamson is an SEO, GEO and AI search strategist who helps brands stay discoverable across traditional search engines and AI-driven answer systems.',
   longBio:
     'Tina Williamson is a search strategist working at the intersection of SEO, generative engine optimization (GEO), answer engine optimization (AEO), analytics and technical implementation. She builds search programs for large website portfolios, designs systems for measuring brand visibility inside AI answer engines, and implements the technical work herself.',
-  location: 'United States',
+  location: 'Camarillo, California — working remotely',
 
   /* --- contact ------------------------------------------------------------ */
   // Interim address. Replace with tina@tinawilliamson.com once the domain is

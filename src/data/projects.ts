@@ -107,7 +107,7 @@ export const projects: Project[] = [
     title: 'Multifamily Search Optimization',
     headline: 'Running Search Optimization at Portfolio Scale in Multifamily',
     org: 'REACH by RentCafe / Yardi',
-    period: 'Technical Specialist',
+    period: 'Marketing Specialist, SEO & Digital Strategy',
     summary:
       'A repeatable onboarding and optimization method applied across dozens of property websites at a time, with consistency and QA built into the process rather than bolted on.',
     role: 'Search strategy, technical implementation, onboarding, QA, performance analysis',
