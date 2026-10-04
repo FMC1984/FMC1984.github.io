@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Portfolio site for Tina Williamson — SEO, GEO & AI search strategy.",
+  "description": "Portfolio site for Tina Williamson \u2014 SEO, GEO & AI search strategy.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -18,5 +18,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
