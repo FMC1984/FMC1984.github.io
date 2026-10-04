@@ -7,6 +7,7 @@ import CTA from '../../components/CTA.astro';
 import { site } from '../../data/site';
 import { projects, searchProjects, dataProjects, disciplineLabels } from '../../data/projects';
 import SectionHeading from '../../components/SectionHeading.astro';
+import Constellation from '../../components/Constellation.astro';
 import { absolute } from '../../lib/paths';
 import { breadcrumbSchema, collectionSchema } from '../../lib/schema';
 
@@ -40,7 +41,8 @@ const schemas = [
     <Fragment slot="title">Case studies</Fragment>
   </Hero>
 
-  <section class="section section--tight section--ruled" aria-labelledby="search-work">
+  <section class="section section--tight section--ruled has-art" aria-labelledby="search-work">
+    <Constellation seed={19} count={18} />
     <div class="container">
       <SectionHeading
         eyebrow="Practice"

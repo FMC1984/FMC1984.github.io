@@ -1,0 +1,62 @@
+---
+/**
+ * Network-of-nodes motif from the banner: points joined by hairlines, a few
+ * nodes brighter than the rest. Deterministic — a fixed seed, so the markup is
+ * identical on every build and never shows up as noise in a diff.
+ *
+ * Decorative only: aria-hidden, ignores pointer events, and the page reads the
+ * same without it.
+ */
+interface Props {
+  /** Node count. Keep it low; this is texture, not a visualisation. */
+  count?: number;
+  /** Max distance (viewBox units) at which two nodes get joined. */
+  link?: number;
+  seed?: number;
+}
+const { count = 22, link = 112, seed = 7 } = Astro.props;
+
+/* Tiny LCG — deterministic pseudo-random, no dependency. */
+let s = seed;
+const rnd = () => ((s = (s * 1103515245 + 12345) % 2147483648) / 2147483648);
+
+const W = 420;
+const H = 300;
+const nodes = Array.from({ length: count }, () => ({
+  x: +(rnd() * W).toFixed(1),
+  y: +(rnd() * H).toFixed(1),
+  r: +(0.9 + rnd() * 2.2).toFixed(2),
+  bright: rnd() > 0.72,
+}));
+
+const edges: { a: typeof nodes[0]; b: typeof nodes[0]; o: string }[] = [];
+for (let i = 0; i < nodes.length; i++) {
+  for (let j = i + 1; j < nodes.length; j++) {
+    const dx = nodes[i].x - nodes[j].x;
+    const dy = nodes[i].y - nodes[j].y;
+    const d = Math.hypot(dx, dy);
+    if (d < link) {
+      edges.push({ a: nodes[i], b: nodes[j], o: (0.30 * (1 - d / link) + 0.06).toFixed(3) });
+    }
+  }
+}
+---
+
+<svg
+  class="art art--constellation"
+  viewBox={`0 0 ${W} ${H}`}
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g stroke="var(--c-gold)" fill="none" stroke-width="0.6">
+    {edges.map((e) => (
+      <line x1={e.a.x} y1={e.a.y} x2={e.b.x} y2={e.b.y} stroke-opacity={e.o} />
+    ))}
+  </g>
+  <g fill="var(--c-gold)">
+    {nodes.map((n) => (
+      <circle cx={n.x} cy={n.y} r={n.r} fill-opacity={n.bright ? 0.9 : 0.42} />
+    ))}
+  </g>
+</svg>

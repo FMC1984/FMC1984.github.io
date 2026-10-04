@@ -6,6 +6,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import ExpertiseCard from '../components/ExpertiseCard.astro';
 import AnswerBlock from '../components/AnswerBlock.astro';
 import CTA from '../components/CTA.astro';
+import DataGlyphs from '../components/DataGlyphs.astro';
 import { site, toolGroups, education } from '../data/site';
 import { expertise } from '../data/experience';
 import { absolute } from '../lib/paths';
@@ -196,7 +197,8 @@ const schemas = [
   </section>
 
   <!-- Tools -------------------------------------------------------------- -->
-  <section class="section section--sand section--ruled" aria-labelledby="tools">
+  <section class="section section--sand section--ruled has-art" aria-labelledby="tools">
+    <DataGlyphs />
     <div class="container">
       <SectionHeading
         eyebrow="Toolset"

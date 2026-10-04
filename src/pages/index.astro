@@ -6,6 +6,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 import ExpertiseCard from '../components/ExpertiseCard.astro';
 import AnswerBlock from '../components/AnswerBlock.astro';
 import CTA from '../components/CTA.astro';
+import Constellation from '../components/Constellation.astro';
+import DataGlyphs from '../components/DataGlyphs.astro';
 import { education } from '../data/site';
 import { featuredProjects } from '../data/projects';
 import { expertise } from '../data/experience';
@@ -130,7 +132,8 @@ const answers = [
   </section>
 
   <!-- Search is changing ------------------------------------------------ -->
-  <section class="section section--sand section--ruled" aria-labelledby="search-changing">
+  <section class="section section--sand section--ruled has-art" aria-labelledby="search-changing">
+    <Constellation />
     <div class="container">
       <div class="grid grid--2" style="gap:var(--sp-6);align-items:start;">
         <div>
@@ -187,7 +190,8 @@ const answers = [
   </section>
 
   <!-- Experience snapshot ----------------------------------------------- -->
-  <section class="section section--ruled" aria-labelledby="experience-snapshot">
+  <section class="section section--ruled has-art" aria-labelledby="experience-snapshot">
+    <DataGlyphs />
     <div class="container">
       <SectionHeading
         eyebrow="Experience snapshot"

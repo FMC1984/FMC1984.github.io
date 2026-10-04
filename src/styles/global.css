@@ -784,3 +784,44 @@ code, kbd {
 
 /* the artwork is a dark-theme device; hide it in the light palette */
 :root[data-theme="light"] .flowband { display: none; }
+
+/* ------------------------------------------------------------ section art */
+
+/* Decorative SVG motifs echoing the banner. Always behind content, never
+   interactive, hidden from assistive tech, and removed in the light palette. */
+
+.has-art { position: relative; overflow: hidden; }
+.has-art > .container { position: relative; z-index: 1; }
+
+.art {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.art--constellation {
+  top: -3rem;
+  right: -4rem;
+  width: min(36rem, 64%);
+  opacity: 0.72;
+  -webkit-mask-image: radial-gradient(ellipse at 75% 30%, #000 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse at 75% 30%, #000 25%, transparent 72%);
+}
+
+.art--glyphs {
+  right: -2rem;
+  bottom: -1rem;
+  width: min(30rem, 54%);
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(to left, #000 35%, transparent 95%);
+  mask-image: linear-gradient(to left, #000 35%, transparent 95%);
+}
+
+:root[data-theme="light"] .art { display: none; }
+
+/* On narrow screens the art sits under the copy, so pull it right back. */
+@media (max-width: 59.99rem) {
+  .art--constellation { opacity: 0.3; width: 70%; top: -2rem; right: -5rem; }
+  .art--glyphs { opacity: 0.25; width: 72%; }
+}

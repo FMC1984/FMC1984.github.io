@@ -1,0 +1,66 @@
+---
+/**
+ * The faint instrument-panel motif from the banner — bars, a ring, a sparkline
+ * and rule rows, drawn almost at the background's own value so it reads as
+ * texture rather than as a chart anyone is meant to read.
+ *
+ * Deliberately non-quantitative: these are not real numbers and are not
+ * labelled as such. Decorative only, aria-hidden.
+ */
+const bars = [18, 34, 26, 52, 41, 68, 47, 80, 62, 92, 71, 58];
+const spark = 'M 0 46 L 18 38 L 36 42 L 54 26 L 72 31 L 90 16 L 108 22 L 126 9';
+const ringCirc = 2 * Math.PI * 26;
+---
+
+<svg
+  class="art art--glyphs"
+  viewBox="0 0 420 220"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- bar cluster -->
+  <g fill="var(--c-rule-strong)" fill-opacity="0.55">
+    {bars.map((h, i) => (
+      <rect x={10 + i * 14} y={110 - h} width="8" height={h} rx="1" />
+    ))}
+  </g>
+
+  <!-- sparkline -->
+  <g transform="translate(10,128)">
+    <path d={spark} fill="none" stroke="var(--c-gold)" stroke-opacity="0.35" stroke-width="1.2" />
+  </g>
+
+  <!-- ring -->
+  <g transform="translate(330,58)">
+    <circle r="26" fill="none" stroke="var(--c-rule-strong)" stroke-opacity="0.5" stroke-width="7" />
+    <circle
+      r="26"
+      fill="none"
+      stroke="var(--c-gold)"
+      stroke-opacity="0.45"
+      stroke-width="7"
+      stroke-dasharray={`${(ringCirc * 0.38).toFixed(1)} ${ringCirc.toFixed(1)}`}
+      transform="rotate(-90)"
+    />
+  </g>
+
+  <!-- rule rows -->
+  <g fill="var(--c-rule-strong)" fill-opacity="0.45">
+    {[0, 1, 2, 3].map((i) => (
+      <>
+        <rect x={286} y={118 + i * 14} width={Math.round(92 - i * 17)} height="3" rx="1.5" />
+        <rect x={286 + 100} y={118 + i * 14} width="18" height="3" rx="1.5" fill-opacity="0.7" />
+      </>
+    ))}
+  </g>
+
+  <!-- dot field -->
+  <g fill="var(--c-gold)" fill-opacity="0.22">
+    {Array.from({ length: 8 }, (_, r) =>
+      Array.from({ length: 14 }, (_, c) => (
+        <circle cx={160 + c * 9} cy={152 + r * 8} r="1" />
+      )),
+    )}
+  </g>
+</svg>
