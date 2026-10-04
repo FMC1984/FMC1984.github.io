@@ -813,8 +813,12 @@ code, kbd {
        than sitting in a box. */
     -webkit-mask-image: var(--flow-mask), linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
     mask-image: var(--flow-mask), linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
-    -webkit-mask-size: cover, 100% 100%;
-    mask-size: cover, 100% 100%;
+    /* The whole wave, full width, compressed to the band's height. `cover`
+       crops top and bottom, and on a band this shallow that leaves only the
+       flattest middle slice of the artwork — the curvature is what makes it
+       read as a wave. Abstract line work takes the vertical squash well. */
+    -webkit-mask-size: 100% 100%, 100% 100%;
+    mask-size: 100% 100%, 100% 100%;
     -webkit-mask-position: center, center;
     mask-position: center, center;
     -webkit-mask-repeat: no-repeat, no-repeat;
