@@ -7,6 +7,9 @@ import { url, absolute } from '../lib/paths';
 import { breadcrumbSchema, ids } from '../lib/schema';
 
 const path = '/contact/';
+
+/** Visible label for a profile link: strips the scheme, www and trailing slash. */
+const handle = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 const origin = Astro.site ? Astro.site.origin.replace(/\/$/, '') : site.origin;
 
 const schemas = [
@@ -56,11 +59,11 @@ const schemas = [
             </div>
             <div>
               <dt>LinkedIn</dt>
-              <dd><a href={site.linkedin} rel="me noopener">linkedin.com/in/tinawilliamson</a></dd>
+              <dd><a href={site.linkedin} rel="me noopener">{handle(site.linkedin)}</a></dd>
             </div>
             <div>
               <dt>GitHub</dt>
-              <dd><a href={site.github} rel="me noopener">github.com/tinawilliamson</a></dd>
+              <dd><a href={site.github} rel="me noopener">{handle(site.github)}</a></dd>
             </div>
             <div>
               <dt>Location</dt>

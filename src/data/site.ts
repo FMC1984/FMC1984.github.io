@@ -1,8 +1,6 @@
 /**
  * Single source of truth for identity, contact details and navigation.
- *
- * TODO (Tina): replace the placeholder contact values below with the real ones.
- * Nothing else in the site hard-codes them.
+ * Nothing else in the site hard-codes these values.
  */
 
 export const site = {
@@ -14,10 +12,10 @@ export const site = {
     'Tina Williamson is a search strategist working at the intersection of SEO, generative engine optimization (GEO), answer engine optimization (AEO), analytics and technical implementation. She builds search programs for large website portfolios, designs systems for measuring brand visibility inside AI answer engines, and implements the technical work herself.',
   location: 'United States',
 
-  /* --- contact: placeholders until confirmed ------------------------------ */
-  email: 'hello@tinawilliamson.com', // TODO: confirm the address to publish
-  linkedin: 'https://www.linkedin.com/in/tinawilliamson/', // TODO: confirm exact URL
-  github: 'https://github.com/FMC1984', // TODO: confirm exact URL
+  /* --- contact ------------------------------------------------------------ */
+  email: 'melodynbloom@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/tina-williamson/',
+  github: 'https://github.com/FMC1984',
 
   /* --- deployment --------------------------------------------------------- */
   // Keep in sync with `site` in astro.config.mjs.
