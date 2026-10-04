@@ -1,11 +1,14 @@
 ---
 /**
- * Section background motif — one of Tina's gold wave variants, spanning the
- * full width of its section rather than tucked into a corner.
+ * Section background motif — one of Tina's gold wave variants, filling its
+ * section edge to edge, top to bottom.
+ *
+ * `mask-size: cover` scales the artwork to fill the box and crops whatever
+ * overflows, so the wave always reaches all four edges regardless of the
+ * section's proportions. `focus` chooses which part survives the crop.
  *
  * Like the hero band, the artwork is an ALPHA MASK and the gold is painted
- * from --c-gold, so every motif on the site is the same colour by
- * construction and a palette change carries through without re-exporting.
+ * from --c-gold, so every motif is the same colour by construction.
  *
  * Decorative only: aria-hidden, non-interactive, removed in the light palette.
  */
@@ -14,44 +17,21 @@ import { url } from '../lib/paths';
 interface Props {
   /** Which variant, 2–5. */
   variant?: 2 | 3 | 4 | 5;
-  /** Where the band sits vertically within the section. */
-  position?: 'top' | 'center' | 'bottom';
-  /** 0–1. Keep low: this spans the full width, behind running text. */
+  /** Which part of the artwork to keep when cropping. */
+  focus?: 'top' | 'center' | 'bottom';
+  /** 0–1. Capped by contrast: above ~0.14 gold text over the wave fails AA. */
   opacity?: number;
-  /** Band height as a share of the section. */
-  height?: string;
   flip?: boolean;
 }
 
-const {
-  variant = 2,
-  position = 'center',
-  opacity = 0.22,
-  height = '82%',
-  flip = false,
-} = Astro.props;
+const { variant = 2, focus = 'center', opacity = 0.14, flip = false } = Astro.props;
 
 const src = url(`/images/art/wave-${variant}.webp`);
-
-const vertical: Record<string, string> = {
-  top: 'top: 0;',
-  center: 'top: 50%; transform: translateY(-50%);',
-  bottom: 'bottom: 0;',
-};
-
-/* `flip` has to compose with the centring transform, not replace it. */
-const transform =
-  position === 'center'
-    ? `transform: translateY(-50%)${flip ? ' scaleX(-1)' : ''};`
-    : flip
-      ? 'transform: scaleX(-1);'
-      : '';
-
-const placement = position === 'center' ? 'top: 50%;' : vertical[position];
+const focusPos = { top: 'center top', center: 'center center', bottom: 'center bottom' }[focus];
 ---
 
 <div
   class="art art--wave"
   aria-hidden="true"
-  style={`${placement} ${transform} height:${height}; opacity:${opacity}; --wave-mask:url('${src}');`}
+  style={`opacity:${opacity}; --wave-mask:url('${src}'); --wave-focus:${focusPos};${flip ? ' transform:scaleX(-1);' : ''}`}
 ></div>

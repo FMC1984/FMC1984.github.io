@@ -880,9 +880,9 @@ code, kbd {
 /* wave motifs — see WaveArt.astro */
 
 .art--wave {
-  left: 0;
-  right: 0;
+  inset: 0;              /* fill the section, edge to edge and top to bottom */
   width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 
@@ -891,19 +891,17 @@ code, kbd {
     background: var(--c-gold);
     -webkit-mask-image: var(--wave-mask);
     mask-image: var(--wave-mask);
-    /* `cover` spans the full width and crops vertically, which is what makes
-       the wave read as crossing the page rather than sitting in a corner. */
     -webkit-mask-size: cover;
     mask-size: cover;
-    -webkit-mask-position: center;
-    mask-position: center;
+    -webkit-mask-position: var(--wave-focus);
+    mask-position: var(--wave-focus);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
   }
 }
 
 @media (max-width: 59.99rem) {
-  .art--wave { opacity: 0.14 !important; }
+  .art--wave { opacity: 0.1 !important; }
 }
 
 /* real screenshots inside the .ph figure wrapper */

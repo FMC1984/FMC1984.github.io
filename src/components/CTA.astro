@@ -1,6 +1,5 @@
 ---
 import { url } from '../lib/paths';
-import WaveArt from './WaveArt.astro';
 
 interface Props {
   title: string;
@@ -13,8 +12,7 @@ interface Props {
 const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
 ---
 
-<section class="cta has-art">
-  <WaveArt variant={5} position="center" opacity={0.14} />
+<section class="cta">
   <div class="container">
     <div class="cta__inner">
       <h2 class="cta__title">{title}</h2>
