@@ -13,7 +13,10 @@ export const site = {
   location: 'United States',
 
   /* --- contact ------------------------------------------------------------ */
-  email: 'melodynbloom@gmail.com',
+  // Gmail plus-addressing: delivers to melodynbloom@gmail.com, but tags every
+  // message that came from the portfolio. If this address ever starts getting
+  // spam, you know it was scraped from here — filter or change the tag.
+  email: 'melodynbloom+portfolio@gmail.com',
   linkedin: 'https://www.linkedin.com/in/tina-williamson/',
   github: 'https://github.com/FMC1984',
 
