@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTA from '../components/CTA.astro';
+import { education, specialties } from '../data/site';
+import { roles } from '../data/experience';
+import { url, absolute } from '../lib/paths';
+import { breadcrumbSchema } from '../lib/schema';
+
+const path = '/experience/';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', item: absolute('/', Astro.site) },
+    { name: 'Experience' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Experience"
+  description="Tina Williamson's experience in SEO, GEO and AI search: Technical Specialist at REACH by RentCafé / Yardi, freelance strategy and development, product work."
+  path={path}
+  schemas={schemas}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Experience' }]} />
+  </div>
+
+  <Hero
+    eyebrow="Experience"
+    compact={true}
+    lead="Roles, what I owned in each, and selected work. For depth on method and implementation, the case studies go further than this page does."
+  >
+    <Fragment slot="title">Professional experience</Fragment>
+  </Hero>
+
+  <section class="section section--tight section--ruled">
+    <div class="container">
+      <h2 class="sr-only">Roles</h2>
+      <ol class="tl">
+        {roles.map((role) => (
+          <li>
+            <div class="tl__row">
+              <p class="tl__when">{role.period}</p>
+              <div>
+                <h3 class="tl__role">{role.title}</h3>
+                <p class="tl__org">
+                  {role.orgUrl
+                    ? <a href={role.orgUrl} rel="noopener">{role.org}</a>
+                    : role.org}
+                </p>
+                <p>{role.context}</p>
+
+                <p class="tl__sub">Areas of ownership</p>
+                <ul>
+                  {role.ownership.map((o) => <li>{o}</li>)}
+                </ul>
+
+                <p class="tl__sub">Selected work</p>
+                <ul>
+                  {role.selected.map((s) => <li>{s}</li>)}
+                </ul>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Education ---------------------------------------------------------- -->
+  <section class="section section--sand section--ruled" aria-labelledby="education">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Education"
+        title="Graduate study"
+        id="education"
+        intro="Deliberately technical: search strategy increasingly depends on being able to query data directly and understand how systems store and retrieve information."
+      />
+      <div class="grid grid--2" style="align-items:start;">
+        <div>
+          <h3 style="font-size:var(--step-2);">{education.degree}</h3>
+          <p class="tl__org">{education.school}</p>
+          <dl class="facts" style="margin-top:var(--sp-3);">
+            <div>
+              <dt>Concentration</dt>
+              <dd>{education.concentration}</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>{education.status}</dd>
+            </div>
+            <div>
+              <dt>Focus areas</dt>
+              <dd>{education.focus.join(' · ')}</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="card">
+          <h3 style="font-size:var(--step-1);">Why it's relevant</h3>
+          <p style="margin-bottom:0.75rem;">
+            The analytics side of search work has outgrown platform reporting. Being able to work with
+            data directly — in SQL, against real schemas — changes what questions you can ask of
+            performance data.
+          </p>
+          <p style="margin-bottom:0;">
+            It also supports the product work: designing a measurement system requires a data model,
+            not just a dashboard concept.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialties -------------------------------------------------------- -->
+  <section class="section section--ruled" aria-labelledby="specialties">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Specialties"
+        title="Skills and focus areas"
+        id="specialties"
+      />
+      <ul class="tags" style="max-width:52rem;">
+        {specialties.map((s) => <li>{s}</li>)}
+      </ul>
+      <p style="margin-top:var(--sp-4);">
+        <a class="link-more" href={url('/resume/')}>View résumé highlights</a>
+      </p>
+    </div>
+  </section>
+
+  <CTA
+    title="The full résumé is one page away."
+    body="Résumé highlights and a downloadable PDF, or go straight to the case studies for method and implementation detail."
+    primaryHref="/resume/"
+    primaryLabel="Résumé"
+    secondaryHref="/work/"
+    secondaryLabel="Case studies"
+  />
+</BaseLayout>

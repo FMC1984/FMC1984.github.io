@@ -1,0 +1,49 @@
+---
+import { site, nav } from '../data/site';
+import { url } from '../lib/paths';
+import { projects } from '../data/projects';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <p class="site-footer__brand">Tina Williamson</p>
+        <p style="margin-top:0.35rem;max-width:26rem;">
+          SEO, GEO and AI search strategy — helping brands stay discoverable as search expands
+          into AI-powered answer systems.
+        </p>
+      </div>
+
+      <div>
+        <h2>Site</h2>
+        <ul>
+          <li><a href={url('/')}>Home</a></li>
+          {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2>Case studies</h2>
+        <ul>
+          {projects.map((p) => (
+            <li><a href={url(`/work/${p.slug}/`)}>{p.title}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <p style="margin:0;">&copy; {year} Tina Williamson</p>
+      <p style="margin:0;">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {' · '}
+        <a href={site.linkedin} rel="me noopener">LinkedIn</a>
+        {' · '}
+        <a href={site.github} rel="me noopener">GitHub</a>
+      </p>
+    </div>
+  </div>
+</footer>

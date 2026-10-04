@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/projects';
+import { url } from '../lib/paths';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page doesn't exist. Links to the main sections of Tina Williamson's portfolio."
+  path="/404/"
+  noindex={true}
+>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1 style="font-size:var(--step-4);">That page doesn't exist.</h1>
+      <p class="lead measure">
+        The link may be out of date, or the URL may have a typo. Here's where everything lives.
+      </p>
+
+      <div class="grid grid--2" style="margin-top:var(--sp-5);align-items:start;">
+        <div>
+          <h2 style="font-size:var(--step-1);">Main sections</h2>
+          <ul style="padding-left:1.1rem;">
+            <li><a href={url('/')}>Home</a></li>
+            <li><a href={url('/work/')}>Work and case studies</a></li>
+            <li><a href={url('/about/')}>About</a></li>
+            <li><a href={url('/experience/')}>Experience</a></li>
+            <li><a href={url('/resume/')}>Résumé</a></li>
+            <li><a href={url('/contact/')}>Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 style="font-size:var(--step-1);">Case studies</h2>
+          <ul style="padding-left:1.1rem;">
+            {projects.map((p) => (
+              <li><a href={url(`/work/${p.slug}/`)}>{p.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import AnswerBlock from '../components/AnswerBlock.astro';
+import CTA from '../components/CTA.astro';
+import { education } from '../data/site';
+import { featuredProjects } from '../data/projects';
+import { expertise } from '../data/experience';
+import { url } from '../lib/paths';
+import { faqSchema } from '../lib/schema';
+
+const answers = [
+  {
+    q: 'What does Tina Williamson specialize in?',
+    a: 'Tina Williamson specializes in SEO, generative engine optimization (GEO) and answer engine optimization (AEO): organic search strategy, technical SEO, structured data, local search, content systems, and analytics in Google Analytics 4 and Google Search Console. Her recent work has focused on multifamily property marketing at portfolio scale and on measuring brand visibility inside AI-driven answer systems.',
+  },
+  {
+    q: 'What is generative engine optimization (GEO)?',
+    a: 'Generative engine optimization is the practice of making a brand accurately and consistently represented in answers produced by AI systems such as Google AI Overviews, ChatGPT, Gemini and Perplexity. It builds on technical SEO and content strategy, and adds entity clarity, fact consistency across sources, retrievable page structure, and measurement of citation presence.',
+  },
+];
+---
+
+<BaseLayout
+  title="Tina Williamson — SEO, GEO & AI Search Strategist"
+  exactTitle={true}
+  description="Tina Williamson is an SEO, GEO and AI search strategist — organic search programs, technical SEO and AI search visibility for brands and portfolios."
+  path="/"
+  schemas={[faqSchema(answers)]}
+>
+  <Hero
+    eyebrow="SEO · GEO · AEO · AI Search"
+    lead="Search didn't stop at the results page. People increasingly ask a question and get an answer — from Google AI Overviews, ChatGPT, Gemini or Perplexity. I build search programs that hold up in both worlds: rigorous technical SEO underneath, with content and entity data structured so AI systems can read it, trust it and cite it."
+    meta="Technical Specialist, REACH by RentCafé / Yardi · M.S. Information Technology, Data Science Concentration — California State University, Fullerton (in progress)"
+  >
+    <Fragment slot="title">
+      I help brands stay findable as search becomes an <em>answer engine</em>.
+    </Fragment>
+
+    <Fragment slot="actions">
+      <p class="btn-row">
+        <a class="btn btn--primary" href={url('/work/')}>View my work</a>
+        <a class="btn btn--ghost" href={url('/about/')}>About me</a>
+      </p>
+    </Fragment>
+
+    <Fragment slot="aside">
+      <div class="layerfig">
+        <p class="layerfig__cap">How an AI answer gets built</p>
+        <ol class="layerfig__list">
+          <li><b>The question</b> A renter or buyer asks in natural language instead of typing a keyword.</li>
+          <li><b>Retrieval</b> The system pulls from pages, listings, reviews and third-party references.</li>
+          <li><b>Entity resolution</b> Conflicting names, addresses and facts weaken what the system will assert.</li>
+          <li><b>The answer</b> One synthesized response, often with a handful of cited sources.</li>
+          <li><b>Visibility</b> Being present, accurate and cited — the thing that now has to be measured.</li>
+        </ol>
+      </div>
+    </Fragment>
+  </Hero>
+
+  <!-- Positioning ------------------------------------------------------- -->
+  <section class="section section--ruled">
+    <div class="container">
+      <div class="grid grid--2" style="gap:var(--sp-6);align-items:start;">
+        <div>
+          <p class="eyebrow eyebrow--muted">Positioning</p>
+          <h2 style="font-size:var(--step-3);">
+            Strategy and implementation, from the same person.
+          </h2>
+          <p class="lead">
+            I work at the intersection of search strategy, AI visibility, analytics, content and
+            technical implementation. That combination matters right now: the organizations getting
+            this right are the ones whose strategy survives contact with the actual build.
+          </p>
+          <p>
+            Most of my recent work has been in multifamily — search strategy and technical
+            implementation across large portfolios of property websites, where the same decision has
+            to be correct dozens of times. Alongside that, I design systems for measuring how brands
+            show up inside AI search, and I build websites end to end when a project calls for it.
+          </p>
+          <p style="margin-bottom:0;">
+            <a class="link-more" href={url('/about/')}>More about how I work</a>
+          </p>
+        </div>
+
+        <div>
+          {answers.map((a) => (
+            <AnswerBlock question={a.q} level={3} boxed={true}>
+              <p>{a.a}</p>
+            </AnswerBlock>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected work ----------------------------------------------------- -->
+  <section class="section section--sand section--ruled" aria-labelledby="selected-work">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Selected work"
+        title="Case studies"
+        id="selected-work"
+        intro="Four projects that show the range: a site designed and built end to end, a product concept for AI search measurement, portfolio-scale optimization, and the GEO method behind it."
+        linkHref={url('/work/')}
+        linkLabel="All work"
+      />
+      {featuredProjects.map((project, i) => (
+        <ProjectCard project={project} index={i + 1} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Expertise --------------------------------------------------------- -->
+  <section class="section section--ruled" aria-labelledby="expertise">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Core expertise"
+        title="Areas I work in"
+        id="expertise"
+        intro="Six areas that overlap in practice. Most projects pull from several at once."
+      />
+      <div class="grid grid--2 grid--3">
+        {expertise.map((item) => <ExpertiseCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Search is changing ------------------------------------------------ -->
+  <section class="section section--sand section--ruled" aria-labelledby="search-changing">
+    <div class="container">
+      <div class="grid grid--2" style="gap:var(--sp-6);align-items:start;">
+        <div>
+          <p class="eyebrow eyebrow--muted">AI search</p>
+          <h2 id="search-changing" style="font-size:var(--step-3);">
+            Search is expanding, not ending.
+          </h2>
+          <p class="lead">
+            Traditional search isn't going away — organic search still drives meaningful discovery and
+            revenue. What's changed is that it's no longer the only surface. A growing share of
+            questions get answered before anyone clicks.
+          </p>
+          <p>
+            That makes GEO and AEO an extension of good search strategy rather than a replacement for
+            it. The fundamentals still decide most outcomes: a crawlable site, clear information
+            architecture, content that matches real intent, accurate structured data, consistent
+            business information. AI search raises the cost of getting those wrong, because an
+            inconsistent fact doesn't just rank poorly — it gets repeated, or it gets dropped.
+          </p>
+          <p style="margin-bottom:0;">
+            <a class="link-more" href={url('/work/geo-aeo-search-strategy/')}>
+              Read the GEO / AEO method
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:var(--step-1);">What this means in practice</h3>
+          <ul style="padding-left:1.1rem;margin:0;">
+            <li style="margin-bottom:0.6rem;">
+              <strong>Entity clarity.</strong> One canonical version of who you are, what you offer and
+              where you are — repeated consistently everywhere it appears.
+            </li>
+            <li style="margin-bottom:0.6rem;">
+              <strong>Retrievable structure.</strong> Answers that can be lifted out of a page without
+              the surrounding context being required to make sense of them.
+            </li>
+            <li style="margin-bottom:0.6rem;">
+              <strong>Question coverage.</strong> Content mapped to the questions people actually ask,
+              in the language they use to ask them.
+            </li>
+            <li style="margin-bottom:0.6rem;">
+              <strong>Citation presence.</strong> Tracking where answers get sourced from — and whether
+              you're in that set.
+            </li>
+            <li>
+              <strong>Measurement.</strong> Treating AI visibility as something to monitor over time,
+              not a one-off audit.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience snapshot ----------------------------------------------- -->
+  <section class="section section--ruled" aria-labelledby="experience-snapshot">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Experience snapshot"
+        title="Where I've done this work"
+        id="experience-snapshot"
+        linkHref={url('/experience/')}
+        linkLabel="Full experience"
+      />
+
+      <dl class="facts" style="max-width:48rem;">
+        <div>
+          <dt>Current role</dt>
+          <dd>Technical Specialist — REACH by RentCafé / Yardi. Search strategy, GEO/AEO and technical implementation for multifamily property marketing.</dd>
+        </div>
+        <div>
+          <dt>Portfolio scale</dt>
+          <dd>A portfolio of approximately 46 properties at one point; onboarding and optimization at a cadence of roughly 20 properties per month.</dd>
+        </div>
+        <div>
+          <dt>Freelance</dt>
+          <dd>Designed and developed the custom website for Douglas County Housing Partnership — architecture, UX, SEO and build.</dd>
+        </div>
+        <div>
+          <dt>Product work</dt>
+          <dd>Designing an AI visibility platform concept for multifamily search: AI answer tracking, entity consistency, citation discovery and competitor visibility.</dd>
+        </div>
+        <div>
+          <dt>Specialties</dt>
+          <dd>SEO · GEO · AEO · technical SEO · structured data · local search · GA4 · Google Search Console · content systems · AI-assisted workflows</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Education --------------------------------------------------------- -->
+  <section class="section section--sand section--ruled" aria-labelledby="education">
+    <div class="container">
+      <div class="grid grid--2" style="gap:var(--sp-6);align-items:start;">
+        <div>
+          <p class="eyebrow eyebrow--muted">Education & technical growth</p>
+          <h2 id="education" style="font-size:var(--step-3);">{education.degree}</h2>
+          <p class="lead" style="margin-bottom:var(--sp-2);">
+            {education.concentration} — <a href={education.schoolUrl} rel="noopener">{education.school}</a>
+          </p>
+          <p class="text-muted" style="font-size:var(--step--1);">{education.status}</p>
+          <p>
+            The graduate work is deliberate. Search strategy has become a data discipline: the useful
+            answers increasingly come from querying data directly, understanding how systems store and
+            retrieve information, and being able to build the thing you specified.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:var(--step-1);">Relevant coursework areas</h3>
+          <ul style="padding-left:1.1rem;margin:0;">
+            {education.focus.map((f) => <li style="margin-bottom:0.35rem;">{f}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Let's talk about how your brand shows up."
+    body="Whether that's organic search, AI visibility, or the technical work underneath both — I'm glad to get into specifics."
+    primaryHref="/contact/"
+    primaryLabel="Get in touch"
+    secondaryHref="/work/"
+    secondaryLabel="View case studies"
+  />
+</BaseLayout>

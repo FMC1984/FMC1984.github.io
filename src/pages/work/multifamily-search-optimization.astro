@@ -1,0 +1,236 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import { getProject } from '../../data/projects';
+
+const project = getProject('multifamily-search-optimization');
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'challenge', label: 'Challenge' },
+  { id: 'role', label: 'My role' },
+  { id: 'approach', label: 'Approach' },
+  { id: 'execution', label: 'Execution' },
+  { id: 'qa', label: 'Quality assurance' },
+  { id: 'screens', label: 'Process artifacts' },
+  { id: 'outcome', label: 'Outcome' },
+  { id: 'why-it-matters', label: 'Why it matters' },
+];
+---
+
+<CaseStudyLayout
+  project={project}
+  sections={sections}
+>
+  <section class="cs-section" id="overview">
+    <h2>Overview</h2>
+    <p>
+      Most SEO case studies describe one website. This one describes a method applied across many at
+      the same time. As a Technical Specialist at REACH by RentCafé / Yardi, my work has centered on
+      search strategy and technical implementation for multifamily property marketing — at one point
+      a portfolio of approximately 46 properties, and later onboarding and optimization at a cadence
+      of roughly 20 properties per month.
+    </p>
+    <p>
+      At that volume the deliverable isn't a single optimization. It's a repeatable process that
+      produces market-specific work without becoming either generic or unmanageable.
+    </p>
+    <p class="text-muted" style="font-size:var(--step--1);">
+      This case study describes method and scope only. It contains no client data, property-level
+      performance figures or confidential information; examples are anonymized.
+    </p>
+  </section>
+
+  <section class="cs-section" id="challenge">
+    <h2>Challenge</h2>
+    <p>
+      Multifamily search is deceptively hard. Each property is a separate local business competing in
+      its own submarket, with its own amenity set, pricing structure, policies and renter questions —
+      but the websites share platforms and templates, and the team supporting them is shared too.
+    </p>
+    <p>The real constraints:</p>
+    <ul>
+      <li><strong>Scale versus specificity.</strong> Templated content ranks poorly and reads badly; fully bespoke content for every property doesn't fit the time available.</li>
+      <li><strong>Local competition.</strong> Every property competes against nearby communities, large listing aggregators, and the map pack.</li>
+      <li><strong>High turnover of facts.</strong> Availability, pricing structures, specials, policies and management details change constantly, which creates drift between the website, listings and the Google Business Profile.</li>
+      <li><strong>Onboarding volume.</strong> New properties arrive continuously and each needs a correct baseline before any optimization is meaningful.</li>
+      <li><strong>Mixed stakeholder fluency.</strong> Recommendations go to property managers and regional teams who don't work in search and need a reason, not a checklist.</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="role">
+    <h2>My role</h2>
+    <ul>
+      <li><strong>Search strategy per property</strong> — intent research, priority pages, content direction for the specific submarket</li>
+      <li><strong>On-page optimization</strong> — titles, meta descriptions, heading structure, body content, internal linking, image optimization, calls to action</li>
+      <li><strong>Technical implementation</strong> — schema markup, metadata, crawl and indexation checks, page-level technical fixes</li>
+      <li><strong>Local search</strong> — Google Business Profile optimization and entity/NAP consistency</li>
+      <li><strong>GEO / AEO work</strong> — structuring property information and FAQs so AI search and answer systems can interpret and cite it correctly</li>
+      <li><strong>Analytics</strong> — Google Search Console and GA4 analysis, performance reporting, prioritized recommendations</li>
+      <li><strong>Property onboarding</strong> — establishing the search baseline for new properties entering the portfolio</li>
+      <li><strong>QA</strong> — verifying implementation across desktop and mobile before anything was considered done</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="approach">
+    <h2>Approach</h2>
+    <p>
+      The method below is the thing I actually built. It's sequenced so that each step's output is the
+      next step's input, which is what makes it repeatable at volume.
+    </p>
+
+    <h3>1. Onboarding baseline</h3>
+    <p>
+      For each new property: confirm the entity facts (name, address, contact, management, policies,
+      amenities), check indexation and crawlability, verify analytics and Search Console access, and
+      establish the local footprint. No optimization starts before the baseline is correct, because
+      optimizing on top of wrong facts just distributes the error.
+    </p>
+
+    <h3>2. Market and intent research</h3>
+    <p>
+      Identify how renters in this specific submarket search: neighborhood and landmark language,
+      unit and bedroom phrasing, amenity priorities, and the question set that comes up for this
+      property type and price point. This is where templated approaches fail — the vocabulary is
+      genuinely local.
+    </p>
+
+    <h3>3. Page-level optimization plan</h3>
+    <p>
+      Map intent to pages so each priority page owns one job: the community overview, floor plans,
+      amenities, neighborhood, and the contact or tour action. Then write the metadata and content
+      direction for each.
+    </p>
+
+    <h3>4. Implementation</h3>
+    <p>
+      Titles and meta descriptions, heading hierarchy, body content, internal links between related
+      pages, descriptive image alt text, schema markup, and calls to action placed where the decision
+      actually gets made.
+    </p>
+
+    <h3>5. Local and entity work</h3>
+    <p>
+      Google Business Profile optimization, category and attribute accuracy, and reconciling the
+      property's facts across the website and its public listings. This is also the foundation of the
+      AEO work — answer systems lean heavily on consistent local entity data.
+    </p>
+
+    <h3>6. FAQ and answer coverage</h3>
+    <p>
+      Build FAQ content from the questions renters actually ask — pet policies, parking, application
+      requirements, lease terms, utilities, neighborhood specifics — written as self-contained answers
+      so they work for a reader scanning the page and for a system extracting a response.
+    </p>
+
+    <h3>7. Measure and iterate</h3>
+    <p>
+      Search Console for query and impression behavior, GA4 for what happens after arrival. The
+      output is a short prioritized list per property, with the reasoning attached, rather than a
+      dashboard nobody reads.
+    </p>
+  </section>
+
+  <section class="cs-section" id="execution">
+    <h2>Execution</h2>
+    <p>Work implemented repeatedly across the portfolio:</p>
+    <ul>
+      <li>Unique, intent-matched title tags and meta descriptions at page level</li>
+      <li>Semantic heading structure on priority templates</li>
+      <li>Body content reflecting submarket vocabulary and amenity priorities</li>
+      <li>Internal linking between community, floor plan, amenity and neighborhood pages</li>
+      <li>Schema markup for property and local business information</li>
+      <li>Descriptive, non-redundant image alt text</li>
+      <li>FAQ sections structured for direct answer extraction</li>
+      <li>Google Business Profile optimization and entity consistency fixes</li>
+      <li>Calls to action aligned to where renters are in their decision</li>
+      <li>Search Console and GA4 analysis with prioritized next steps</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="qa">
+    <h2>Quality assurance</h2>
+    <p>
+      QA is the step that makes volume possible without quality collapsing. For each property I
+      verified:
+    </p>
+    <ul>
+      <li>Metadata rendered as intended, with no truncation or duplication across pages</li>
+      <li>Headings form a correct hierarchy and the page's subject is unambiguous</li>
+      <li>Structured data validates and matches the visible page content</li>
+      <li>Internal links resolve and point at the intended page</li>
+      <li>Images carry useful alt text and are sized appropriately</li>
+      <li>Layout, navigation and CTAs behave correctly at mobile and desktop widths</li>
+      <li>Entity facts match between the website, the Google Business Profile and listings</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="screens">
+    <h2>Process artifacts</h2>
+    <p class="text-muted" style="font-size:var(--step--1);">
+      Anonymized examples to be added. Replace with screenshots that contain no client-identifying
+      or confidential information.
+    </p>
+
+    <ImagePlaceholder
+      label="Onboarding checklist"
+      description="The property onboarding checklist, anonymized — the baseline sequence applied to every new property."
+      path="/images/projects/multifamily-seo/onboarding-checklist.png"
+      caption="Onboarding baseline: the same sequence every time, which is what makes volume survivable."
+    />
+
+    <ImagePlaceholder
+      label="Page optimization map"
+      description="Intent-to-page mapping for a representative property, anonymized."
+      path="/images/projects/multifamily-seo/page-optimization-map.png"
+      caption="Each priority page owns one job."
+    />
+
+    <ImagePlaceholder
+      label="Search Console analysis"
+      description="Query and impression analysis view with property-identifying details removed."
+      path="/images/projects/multifamily-seo/search-console-analysis.png"
+      caption="Search Console analysis — anonymized before publishing."
+    />
+
+    <ImagePlaceholder
+      label="FAQ structure"
+      description="Example FAQ block structured for direct answer extraction, anonymized."
+      path="/images/projects/multifamily-seo/faq-structure.png"
+      caption="Self-contained answers: readable on the page, extractable by an answer engine."
+    />
+  </section>
+
+  <section class="cs-section" id="outcome">
+    <h2>Outcome</h2>
+    <p>Confirmed scope and capabilities:</p>
+    <ul>
+      <li>Managed a portfolio of approximately 46 properties at one point, each with its own market and competitive set</li>
+      <li>Worked onboarding and optimization at a cadence of roughly 20 properties per month</li>
+      <li>Built a documented, repeatable onboarding and optimization method rather than case-by-case work</li>
+      <li>Implemented the technical layer directly — schema, metadata, internal linking, image optimization — and QA'd it</li>
+      <li>Extended the standard SEO method to cover GEO/AEO requirements: entity consistency and answer-ready content structure</li>
+      <li>Translated Search Console and GA4 data into prioritized recommendations for non-specialist stakeholders</li>
+    </ul>
+    <p>
+      Portfolio-level performance results: <span class="todo">[ADD VERIFIED RESULT]</span> — organic
+      visibility, impression, click or lead metrics to be added only where they can be verified and
+      shared without disclosing client information.
+    </p>
+  </section>
+
+  <section class="cs-section" id="why-it-matters">
+    <h2>Why it matters</h2>
+    <p>
+      Working at this volume changed how I approach search work generally. When a decision has to be
+      correct forty-six times, you stop reasoning case by case and start designing the process: what
+      gets checked, in what order, with what evidence, and how a second person could verify it.
+    </p>
+    <p>
+      It's also where the GEO work became concrete rather than theoretical. Entity consistency,
+      canonical facts and self-contained answers aren't abstractions in multifamily — they're the
+      difference between an answer engine confidently describing your property and quietly naming a
+      competitor instead.
+    </p>
+  </section>
+</CaseStudyLayout>

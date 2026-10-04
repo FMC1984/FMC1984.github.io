@@ -1,0 +1,136 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTA from '../components/CTA.astro';
+import { site, education, specialties } from '../data/site';
+import { roles } from '../data/experience';
+import { url, absolute } from '../lib/paths';
+import { breadcrumbSchema } from '../lib/schema';
+
+const path = '/resume/';
+
+/* The download button only renders if the PDF actually exists in public/.
+   That way the site never ships a link to a missing file. Add the PDF at
+   public/resume/tina-williamson-resume.pdf and rebuild. */
+const hasPdf = existsSync(join(process.cwd(), 'public', site.resumePdf));
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', item: absolute('/', Astro.site) },
+    { name: 'Resume' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Résumé"
+  description="Résumé highlights for Tina Williamson — SEO, GEO and AI search strategist. Experience, specialties and education, with a downloadable PDF."
+  path={path}
+  schemas={schemas}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Resume' }]} />
+  </div>
+
+  <Hero
+    eyebrow="Résumé"
+    compact={true}
+    lead="Highlights below. The PDF is the same content in a format you can forward; the case studies go deeper on method than any résumé can."
+  >
+    <Fragment slot="title">Résumé</Fragment>
+  </Hero>
+
+  <section class="section section--tight section--ruled">
+    <div class="container">
+      <p class="btn-row" style="margin-top:0;">
+        {hasPdf ? (
+          <a class="btn btn--primary" href={url(site.resumePdf)} download>
+            Download PDF résumé
+          </a>
+        ) : (
+          <span class="todo">[ADD RESUME PDF: public{site.resumePdf}]</span>
+        )}
+        <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email me</a>
+      </p>
+      {!hasPdf && (
+        <p class="text-muted" style="font-size:var(--step--1);max-width:38rem;">
+          Add the PDF at <code>public{site.resumePdf}</code> and rebuild — the download button
+          appears automatically. See the README under “Adding the résumé PDF”.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- Summary ------------------------------------------------------------ -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="grid grid--sidebar">
+        <div>
+          <SectionHeading eyebrow="Summary" title="Profile" level={2} id="profile" />
+          <p class="lead measure" style="margin-bottom:var(--sp-5);">
+            Search strategist specializing in SEO, generative engine optimization and answer engine
+            optimization, with hands-on technical implementation and analytics experience. Recent
+            work centers on multifamily property marketing at portfolio scale and on measuring brand
+            visibility inside AI-driven search.
+          </p>
+
+          <SectionHeading eyebrow="Experience" title="Roles" level={2} id="roles" />
+          <ol class="tl" style="margin-bottom:var(--sp-5);">
+            {roles.map((role) => (
+              <li>
+                <div class="tl__row">
+                  <p class="tl__when">{role.period}</p>
+                  <div>
+                    <h3 class="tl__role" style="font-size:var(--step-1);">{role.title}</h3>
+                    <p class="tl__org">{role.org}</p>
+                    <ul>
+                      {role.selected.map((s) => <li>{s}</li>)}
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <SectionHeading eyebrow="Education" title="Education" level={2} id="education" />
+          <p>
+            <strong>{education.degree}</strong>, {education.concentration}<br />
+            {education.school} — {education.status}<br />
+            <span class="text-muted">Focus: {education.focus.join(', ')}</span>
+          </p>
+        </div>
+
+        <aside aria-labelledby="skills-heading">
+          <h2 id="skills-heading" style="font-family:var(--f-sans);font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--c-muted);">
+            Specialties
+          </h2>
+          <ul style="list-style:none;margin:0;padding:0;font-size:var(--step--1);">
+            {specialties.map((s) => (
+              <li style="border-top:1px solid var(--c-rule);padding:0.5rem 0;">{s}</li>
+            ))}
+          </ul>
+
+          <h2 style="font-family:var(--f-sans);font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--c-muted);margin-top:var(--sp-5);">
+            Certifications
+          </h2>
+          <p style="font-size:var(--step--1);">
+            <span class="todo">[ADD VERIFIED CERTIFICATIONS]</span>
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Happy to talk specifics."
+    body="If you're hiring for search strategy, GEO/AEO or technical SEO work, I'd rather have a conversation than trade documents."
+    primaryHref="/contact/"
+    primaryLabel="Get in touch"
+    secondaryHref="/experience/"
+    secondaryLabel="Full experience"
+  />
+</BaseLayout>

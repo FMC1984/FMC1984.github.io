@@ -1,0 +1,193 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import { getProject } from '../../data/projects';
+
+const project = getProject('douglas-county-housing-partnership');
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'challenge', label: 'Challenge' },
+  { id: 'role', label: 'My role' },
+  { id: 'approach', label: 'Approach' },
+  { id: 'execution', label: 'Execution' },
+  { id: 'screens', label: 'The site' },
+  { id: 'outcome', label: 'Outcome' },
+  { id: 'why-it-matters', label: 'Why it matters' },
+];
+---
+
+<CaseStudyLayout
+  project={project}
+  sections={sections}
+>
+  <section class="cs-section" id="overview">
+    <h2>Overview</h2>
+    <p>
+      Douglas County Housing Partnership needed a digital presence that could explain what the
+      organization does — programs, resources, housing-related services and organizational
+      information — to people who arrive with a specific need and limited patience. I took the project
+      from strategy through implementation: information architecture, user pathways, page structure,
+      SEO, and the build itself.
+    </p>
+  </section>
+
+  <section class="cs-section" id="challenge">
+    <h2>Challenge</h2>
+    <p>
+      Housing organizations carry a hard content problem. The audience isn't one group: it includes
+      residents looking for help, partner organizations, property owners, funders and board members.
+      The information is dense, partly regulatory, and often the thing a visitor needs most is three
+      clicks away from the thing the organization most wants to say.
+    </p>
+    <p>Specifically, the site had to:</p>
+    <ul>
+      <li>Make programs and services findable without requiring prior knowledge of how housing programs are organized</li>
+      <li>Separate "I need help now" pathways from organizational and partner-facing content</li>
+      <li>Present resources in a structure that holds up as the organization adds to it</li>
+      <li>Be credible — a housing nonprofit's website is part of how it establishes trust</li>
+      <li>Be discoverable in search for the local, need-driven queries people actually use</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="role">
+    <h2>My role</h2>
+    <p>
+      This was a freelance engagement where I owned the full scope rather than one slice of it:
+    </p>
+    <ul>
+      <li><strong>Digital strategy</strong> — what the site needed to accomplish, and for whom</li>
+      <li><strong>Information architecture</strong> — the page hierarchy and navigation model</li>
+      <li><strong>UX decisions</strong> — pathways, page-level structure, calls to action</li>
+      <li><strong>Content organization</strong> — grouping and sequencing existing material into pages that make sense to a first-time visitor</li>
+      <li><strong>SEO</strong> — page titles, metadata, heading structure, internal linking, image optimization, local search considerations</li>
+      <li><strong>Design and development</strong> — the custom site, built and QA'd</li>
+      <li><strong>AI-assisted development</strong> — used where it shortened implementation without compromising the result</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="approach">
+    <h2>Approach</h2>
+
+    <h3>1. Define the information architecture first</h3>
+    <p>
+      Before any design, I mapped what the organization does into a hierarchy a stranger could
+      navigate — grouping by what a visitor is trying to accomplish rather than by internal
+      department or program-funding structure. That decision shaped everything downstream, including
+      the URL structure and the internal linking model.
+    </p>
+
+    <h3>2. Organize user pathways</h3>
+    <p>
+      Each primary audience got a clear entry point and a short route to the information or contact
+      action that resolves their visit. Where a page served two audiences, I split it rather than
+      hedging the copy.
+    </p>
+
+    <h3>3. Build a search-friendly page hierarchy</h3>
+    <p>
+      Pages were structured so that each one has a single clear subject, a descriptive title and
+      heading, and a logical parent. That's good SEO, but it's also what makes a page extractable: an
+      answer engine can lift a self-contained explanation of a program out of a page built this way.
+    </p>
+
+    <h3>4. Implement, then optimize technically</h3>
+    <p>
+      With the structure settled, I built the site and worked through the technical layer: semantic
+      markup, metadata, heading hierarchy, descriptive alt text, internal linking, image
+      optimization, and mobile behavior.
+    </p>
+
+    <h3>5. QA across desktop and mobile</h3>
+    <p>
+      Every template was checked at mobile, tablet and desktop widths, including navigation behavior,
+      link targets, form behavior and readability at small sizes.
+    </p>
+  </section>
+
+  <section class="cs-section" id="execution">
+    <h2>Execution</h2>
+    <p>What was actually delivered:</p>
+    <ul>
+      <li>A custom, responsive website — not a template configuration</li>
+      <li>A documented page hierarchy with clean, descriptive URLs</li>
+      <li>Navigation and internal linking that reflect the audience pathways rather than the org chart</li>
+      <li>Page-level SEO: unique titles, meta descriptions, semantic heading structure, descriptive image alt text</li>
+      <li>Content reorganized into pages with single, clear subjects</li>
+      <li>Technical QA across breakpoints and primary browsers</li>
+      <li>Handoff guidance so the organization can add resources without breaking the structure</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="screens">
+    <h2>The site</h2>
+    <p class="text-muted" style="font-size:var(--step--1);">
+      Screenshots to be added. Each frame below names the exact file path to drop the image at.
+    </p>
+
+    <ImagePlaceholder
+      label="Homepage — desktop"
+      description="Full homepage at desktop width, showing the primary audience pathways."
+      path="/images/projects/dchp/homepage-desktop.png"
+      caption="Homepage: primary pathways above the fold, programs and resources below."
+      ratio="tall"
+    />
+
+    <ImagePlaceholder
+      label="Homepage — mobile"
+      description="Homepage at mobile width, showing the collapsed navigation and stacked layout."
+      path="/images/projects/dchp/homepage-mobile.png"
+      caption="Mobile layout, where most need-driven traffic arrives."
+      ratio="square"
+    />
+
+    <ImagePlaceholder
+      label="Program page"
+      description="A representative program or services page, showing the page-level content structure."
+      path="/images/projects/dchp/program-page.png"
+      caption="Program template: one subject per page, with a clear next action."
+    />
+
+    <ImagePlaceholder
+      label="Resources section"
+      description="The resources index, showing how material is grouped for scanning."
+      path="/images/projects/dchp/resources.png"
+      caption="Resources, grouped so the structure survives additions."
+    />
+  </section>
+
+  <section class="cs-section" id="outcome">
+    <h2>Outcome</h2>
+    <p>
+      The organization has a custom website it owns, with a structure that matches how its audiences
+      actually arrive and a technical foundation that doesn't need to be redone to support search.
+      Capabilities delivered:
+    </p>
+    <ul>
+      <li>A navigable, audience-first information architecture replacing an ad hoc structure</li>
+      <li>Search-ready page hierarchy, metadata and internal linking implemented at launch rather than retrofitted</li>
+      <li>A responsive experience QA'd across devices</li>
+      <li>A content model the organization can extend without a redesign</li>
+    </ul>
+    <p>
+      Quantitative performance data for this engagement:
+      <span class="todo">[ADD VERIFIED RESULT]</span> — organic search, engagement or inquiry metrics
+      to be added once confirmed from the organization's analytics.
+    </p>
+  </section>
+
+  <section class="cs-section" id="why-it-matters">
+    <h2>Why it matters</h2>
+    <p>
+      This is the project I point to when the question is whether I can go from strategy to a shipped
+      build. The architecture work and the implementation weren't two engagements with a handoff in
+      between — which is the main reason the structure survived into the finished site intact.
+    </p>
+    <p>
+      It also reflects how I think about SEO on a small site: there's no budget for a content program
+      that out-publishes competitors, so the advantage has to come from clarity. A site where every
+      page has one subject, a descriptive title and a sensible parent is both easier for people to
+      use and easier for search engines and answer engines to interpret correctly.
+    </p>
+  </section>
+</CaseStudyLayout>

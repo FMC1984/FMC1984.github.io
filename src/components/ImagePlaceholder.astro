@@ -1,0 +1,37 @@
+---
+/**
+ * Marks where a real screenshot belongs. Rendered as a dashed frame that states
+ * the exact file path to drop the image at, so nothing is ambiguous later.
+ *
+ * Once the image exists, replace the whole component call with:
+ *   <figure class="ph">
+ *     <img src={url('/images/projects/dchp/homepage.png')} width="1200" height="800"
+ *          alt="Descriptive alt text." loading="lazy" decoding="async" />
+ *     <figcaption>Caption.</figcaption>
+ *   </figure>
+ */
+interface Props {
+  /** What the screenshot should show. */
+  label: string;
+  description: string;
+  /** Intended file path, e.g. '/images/projects/dchp/homepage-desktop.png'. */
+  path: string;
+  /** Optional caption shown under the frame. */
+  caption?: string;
+  /** Approximate aspect, used to reserve space and avoid layout shift. */
+  ratio?: 'wide' | 'tall' | 'square';
+}
+const { label, description, path, caption, ratio = 'wide' } = Astro.props;
+const minHeight = ratio === 'tall' ? '26rem' : ratio === 'square' ? '18rem' : '14rem';
+---
+
+<figure class="ph">
+  <div class="ph__frame" style={`min-height:${minHeight}`} role="img" aria-label={`Placeholder: ${description}`}>
+    <div class="ph__inner">
+      <p class="ph__label">{label}</p>
+      <p class="ph__desc">{description}</p>
+      <p class="ph__path"><code>public{path}</code></p>
+    </div>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

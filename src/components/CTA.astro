@@ -1,0 +1,28 @@
+---
+import { url } from '../lib/paths';
+
+interface Props {
+  title: string;
+  body: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
+---
+
+<section class="cta">
+  <div class="container">
+    <div class="cta__inner">
+      <h2 class="cta__title">{title}</h2>
+      <p class="lead">{body}</p>
+      <p class="btn-row" style="margin-bottom:0;">
+        <a class="btn btn--primary" href={url(primaryHref)}>{primaryLabel}</a>
+        {secondaryHref && secondaryLabel && (
+          <a class="btn btn--ghost" href={url(secondaryHref)}>{secondaryLabel}</a>
+        )}
+      </p>
+    </div>
+  </div>
+</section>

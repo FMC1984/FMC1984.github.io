@@ -1,0 +1,253 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import AnswerBlock from '../../components/AnswerBlock.astro';
+import { getProject } from '../../data/projects';
+
+const project = getProject('ai-visibility-platform');
+
+const sections = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'challenge', label: 'Challenge' },
+  { id: 'role', label: 'My role' },
+  { id: 'system', label: 'The system' },
+  { id: 'approach', label: 'Approach' },
+  { id: 'integrations', label: 'Integrations' },
+  { id: 'screens', label: 'Dashboard concept' },
+  { id: 'outcome', label: 'Outcome' },
+  { id: 'why-it-matters', label: 'Why it matters' },
+];
+---
+
+<CaseStudyLayout
+  project={project}
+  sections={sections}
+>
+  <section class="cs-section" id="overview">
+    <h2>Overview</h2>
+    <p>
+      This is a product and measurement concept I'm developing: a property-level dashboard that
+      answers a question conventional SEO tools don't. Not "where does this property rank?" but
+      "when someone asks an AI assistant about apartments in this market, is this property
+      represented — and is what it says accurate?"
+    </p>
+    <p>
+      The work here is system design: defining what AI visibility consists of, which signals can
+      actually be measured, where the data comes from, and how it rolls up into something a property
+      marketer or regional manager can act on.
+    </p>
+  </section>
+
+  <section class="cs-section" id="challenge">
+    <h2>Challenge</h2>
+    <p>
+      Multifamily marketing has a well-developed answer to the ranking question and almost no answer
+      to the representation question. Meanwhile renters are increasingly asking assistants things
+      like "what are the best pet-friendly apartments near downtown under $2,000" and getting a
+      synthesized answer naming a handful of communities.
+    </p>
+    <p>That creates problems that existing tooling doesn't surface:</p>
+    <ul>
+      <li><strong>Absence is invisible.</strong> A rank tracker can't tell you that you weren't named in an answer that named three competitors.</li>
+      <li><strong>Inaccuracy propagates.</strong> If pet policy, pricing structure, amenities or address data conflict across the website, listing sites and the Google Business Profile, AI systems may assert the wrong version — or hedge and name someone else.</li>
+      <li><strong>Sources are unknown.</strong> Answers draw on third-party sites, reviews and aggregators that the property team may not even monitor.</li>
+      <li><strong>Question coverage is unmeasured.</strong> Nobody has an inventory of the questions renters ask against the content that would answer them.</li>
+      <li><strong>It's a portfolio problem.</strong> Checking one property by hand is feasible. Doing it for dozens, repeatedly, is not.</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="role">
+    <h2>My role</h2>
+    <ul>
+      <li><strong>Product strategy</strong> — defining the problem, the user, and what a useful answer looks like</li>
+      <li><strong>Measurement framework</strong> — turning "AI visibility" into specific, observable signals</li>
+      <li><strong>System and data model design</strong> — entities, sources, questions, citations, competitors</li>
+      <li><strong>Integration architecture</strong> — which platforms supply which inputs, and what each one can and can't tell you</li>
+      <li><strong>Research workflows</strong> — AI-assisted competitor and digital-footprint analysis</li>
+      <li><strong>Dashboard design direction</strong> — what a property-level and portfolio-level view needs to show</li>
+    </ul>
+    <p class="text-muted" style="font-size:var(--step--1);">
+      This case study describes a concept I'm developing independently. It contains no client data,
+      proprietary information or confidential material.
+    </p>
+  </section>
+
+  <section class="cs-section" id="system">
+    <h2>The system</h2>
+    <p>
+      The core idea is a chain. Each stage is measurable, and a weakness at any stage reduces
+      visibility at the stages after it.
+    </p>
+
+    <ol class="flowdiagram">
+      <li>
+        <b>AI visibility</b>
+        <span>The outcome: how often and how accurately the property appears in AI-generated answers.</span>
+      </li>
+      <li>
+        <b>Sources</b>
+        <span>What the systems retrieve from — the property site, listing platforms, reviews, local and third-party references.</span>
+      </li>
+      <li>
+        <b>Entity consistency</b>
+        <span>Whether name, address, contact details, amenities, policies and positioning agree across every one of those sources.</span>
+      </li>
+      <li>
+        <b>Citation presence</b>
+        <span>Which sources actually get cited in answers for the market's questions — and whether the property is in that set.</span>
+      </li>
+      <li>
+        <b>Question coverage</b>
+        <span>The inventory of real renter questions mapped against content that answers them clearly enough to be extracted.</span>
+      </li>
+      <li>
+        <b>Competitor visibility</b>
+        <span>Who is being named instead, for which questions, and which of their sources are doing the work.</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cs-section" id="approach">
+    <h2>Approach</h2>
+
+    <h3>Define visibility as observable signals</h3>
+    <p>
+      "AI visibility" is only useful if it decomposes into things you can check repeatedly. The
+      framework breaks it into: presence (named or not), accuracy (what's asserted versus what's
+      true), source attribution (which pages get cited), coverage (which questions have answerable
+      content), and share (presence relative to the competitive set).
+    </p>
+
+    <h3>Start from the questions, not the keywords</h3>
+    <p>
+      The unit of analysis is a renter question, not a keyword. Questions get grouped by intent —
+      pricing and availability, pet policy, parking, amenities, neighborhood, application and
+      qualification, lease terms — because that's how both renters and answer systems operate.
+    </p>
+
+    <h3>Audit the public digital footprint</h3>
+    <p>
+      Before any content work, the system inventories everywhere the property appears publicly and
+      flags conflicts. Entity and fact consistency is the highest-leverage fix in this whole chain and
+      the most commonly neglected.
+    </p>
+
+    <h3>Diagnose, then prioritize</h3>
+    <p>
+      Findings roll up into diagnostics a property marketer can act on: where facts disagree, which
+      high-intent questions have no answerable content, which competitors dominate which question
+      clusters, and which sources are worth influencing first.
+    </p>
+
+    <h3>Design for portfolio scale from the start</h3>
+    <p>
+      Property-level detail with portfolio-level rollups, so a regional role can see which properties
+      need attention without opening every dashboard.
+    </p>
+  </section>
+
+  <section class="cs-section" id="integrations">
+    <h2>Integrations</h2>
+    <p>
+      Each integration below is part of the concept's architecture, chosen for a specific job. The
+      point of combining them is that none of them answers the visibility question alone.
+    </p>
+    <ul>
+      <li><strong>Google Analytics 4</strong> — behavior and engagement context for traffic that does arrive, and a baseline for organic performance</li>
+      <li><strong>Google Search Console</strong> — the query-level view of conventional search demand and impression/click behavior</li>
+      <li><strong>Google Business Profile</strong> — the canonical local entity record: name, address, hours, attributes, reviews, Q&amp;A</li>
+      <li><strong>AI-generated research</strong> — structured prompting against answer engines to observe what gets said and cited for a market's question set</li>
+      <li><strong>Competitor data</strong> — the same question set run against the competitive set, to show relative presence</li>
+      <li><strong>Public digital footprint sources</strong> — listing platforms, directories, reviews and third-party references where entity facts live</li>
+      <li><strong>Yext (concept)</strong> — listings and entity data management, as a correction layer once inconsistencies are identified</li>
+      <li><strong>Microsoft Clarity (concept)</strong> — on-site behavior detail, useful for diagnosing whether answerable content is actually being read</li>
+    </ul>
+  </section>
+
+  <section class="cs-section" id="screens">
+    <h2>Dashboard concept</h2>
+    <p class="text-muted" style="font-size:var(--step--1);">
+      Interface screenshots to be added. Each frame names the file path to drop the image at.
+    </p>
+
+    <ImagePlaceholder
+      label="Property dashboard"
+      description="Property-level AI visibility overview: presence, accuracy flags and question coverage."
+      path="/images/projects/ai-visibility/property-dashboard.png"
+      caption="Property view: one screen answering 'how are we represented right now?'"
+      ratio="tall"
+    />
+
+    <ImagePlaceholder
+      label="Entity consistency audit"
+      description="Side-by-side comparison of property facts across the website, listings and Google Business Profile, with conflicts flagged."
+      path="/images/projects/ai-visibility/entity-consistency.png"
+      caption="Entity audit: conflicts are the highest-leverage thing to fix first."
+    />
+
+    <ImagePlaceholder
+      label="Question coverage"
+      description="Renter question clusters mapped against existing content, showing gaps."
+      path="/images/projects/ai-visibility/question-coverage.png"
+      caption="Coverage map: which real questions have answerable content."
+    />
+
+    <ImagePlaceholder
+      label="Competitor visibility"
+      description="Share-of-answer view showing which competitors are named for which question clusters."
+      path="/images/projects/ai-visibility/competitor-visibility.png"
+      caption="Competitive view: who gets named instead, and where."
+    />
+
+    <ImagePlaceholder
+      label="Portfolio rollup"
+      description="Multi-property view ranking properties by visibility and outstanding issues."
+      path="/images/projects/ai-visibility/portfolio-rollup.png"
+      caption="Portfolio rollup, for roles responsible for many properties at once."
+    />
+  </section>
+
+  <section class="cs-section" id="outcome">
+    <h2>Outcome</h2>
+    <p>
+      Current status: concept and system design. What exists today is the measurement framework, the
+      data model, the integration architecture and the dashboard structure.
+    </p>
+    <ul>
+      <li>A definition of AI visibility that decomposes into measurable signals rather than a single opaque score</li>
+      <li>A data model connecting properties, sources, questions, citations and competitors</li>
+      <li>An integration architecture spanning GA4, Search Console, Google Business Profile, AI research and public footprint sources</li>
+      <li>A diagnostic output designed for property marketers, not analysts</li>
+    </ul>
+    <p>
+      Build and validation status: <span class="todo">[ADD VERIFIED RESULT]</span> — prototype
+      progress, pilot properties or validation findings to be added as they're confirmed.
+    </p>
+
+    <AnswerBlock question="Why measure AI visibility separately from rankings?" level={3} boxed={true}>
+      <p>
+        Because the two can diverge. A property can rank well for its branded and local terms while
+        being absent from, or misrepresented in, the synthesized answers people increasingly see
+        first. Rankings measure position in a list of links; AI visibility measures whether you're
+        present, accurate and cited in an answer — which is a different question with different
+        inputs.
+      </p>
+    </AnswerBlock>
+  </section>
+
+  <section class="cs-section" id="why-it-matters">
+    <h2>Why it matters</h2>
+    <p>
+      This project is the clearest example of how I think about search now. The strategic insight
+      isn't that AI search matters — most of the industry agrees on that. It's that the question has
+      to be made measurable before anyone can act on it, and that the measurement decomposes into
+      unglamorous work: source inventories, fact reconciliation, question mapping.
+    </p>
+    <p>
+      It's also a product-thinking exercise rather than an SEO deliverable. Deciding what not to
+      measure, what a single screen should answer, and how a portfolio role differs from a property
+      role are product decisions. That's the skill set I'm building toward, and it's why the graduate
+      work in data science is part of the same arc.
+    </p>
+  </section>
+</CaseStudyLayout>

@@ -1,0 +1,27 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+---
+
+<dl class="csmeta" style="border-top:1px solid var(--c-rule);border-bottom:1px solid var(--c-rule);">
+  <div>
+    <dt class="csmeta__k">Organization</dt>
+    <dd class="csmeta__v">{project.org}</dd>
+  </div>
+  <div>
+    <dt class="csmeta__k">Context</dt>
+    <dd class="csmeta__v">{project.period}</dd>
+  </div>
+  <div>
+    <dt class="csmeta__k">My role</dt>
+    <dd class="csmeta__v">{project.role}</dd>
+  </div>
+  <div>
+    <dt class="csmeta__k">Disciplines</dt>
+    <dd class="csmeta__v">{project.tags.join(', ')}</dd>
+  </div>
+</dl>

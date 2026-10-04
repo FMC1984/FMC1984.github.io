@@ -1,0 +1,26 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  /** Heading level — keeps the document outline correct on every page. */
+  level?: 2 | 3;
+  id?: string;
+  /** Put an action link (e.g. "All work") beside the heading on wide screens. */
+  linkHref?: string;
+  linkLabel?: string;
+}
+const { eyebrow, title, intro, level = 2, id, linkHref, linkLabel } = Astro.props;
+const Tag = `h${level}` as 'h2' | 'h3';
+---
+
+<div class={linkHref ? 'sh sh--split' : 'sh'}>
+  <div>
+    {eyebrow && <p class="eyebrow eyebrow--muted">{eyebrow}</p>}
+    <Tag class="sh__title" id={id}>{title}</Tag>
+    {intro && <p class="sh__intro">{intro}</p>}
+  </div>
+  {linkHref && linkLabel && (
+    <p style="margin:0;"><a class="link-more" href={linkHref}>{linkLabel}</a></p>
+  )}
+</div>

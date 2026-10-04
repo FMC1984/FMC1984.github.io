@@ -1,0 +1,8 @@
+# robots.txt — tinawilliamson.github.io
+# Everything on this site is intended to be crawlable, including by AI
+# crawlers: the point of the site is to be discoverable and quotable.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://tinawilliamson.github.io/sitemap-index.xml

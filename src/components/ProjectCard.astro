@@ -1,0 +1,44 @@
+---
+import type { Project } from '../data/projects';
+import { url } from '../lib/paths';
+
+interface Props {
+  project: Project;
+  /** Display index, e.g. 1 -> "01". */
+  index: number;
+  /** Heading level for the card title. */
+  level?: 2 | 3;
+}
+const { project, index, level = 3 } = Astro.props;
+const Tag = `h${level}` as 'h2' | 'h3';
+const href = url(`/work/${project.slug}/`);
+const num = String(index).padStart(2, '0');
+---
+
+<article class="pcard">
+  <p class="pcard__index">
+    <span aria-hidden="true">{num}</span>
+    <span class="sr-only">Project {index}</span>
+    <span class="pcard__org">{project.org}</span>
+  </p>
+
+  <div>
+    <Tag class="pcard__title"><a href={href}>{project.title}</a></Tag>
+    <p class="pcard__summary">{project.summary}</p>
+    <ul class="tags">
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <p style="margin:1.25rem 0 0;">
+      <a class="link-more" href={href}>
+        Read the case study<span class="sr-only">: {project.title}</span>
+      </a>
+    </p>
+  </div>
+
+  <dl class="pcard__aside">
+    <dt>Role</dt>
+    <dd>{project.role}</dd>
+    <dt>Context</dt>
+    <dd>{project.period}</dd>
+  </dl>
+</article>

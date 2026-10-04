@@ -1,0 +1,26 @@
+---
+import { url } from '../lib/paths';
+
+export interface CrumbLink {
+  name: string;
+  /** Site-root-relative path. Omit on the current page. */
+  href?: string;
+}
+
+interface Props {
+  crumbs: CrumbLink[];
+}
+const { crumbs } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((c) => (
+      <li>
+        {c.href
+          ? <a href={url(c.href)}>{c.name}</a>
+          : <span aria-current="page">{c.name}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

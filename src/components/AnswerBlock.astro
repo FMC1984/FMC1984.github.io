@@ -1,0 +1,21 @@
+---
+/**
+ * A short, direct answer to a real question. These exist because clear,
+ * self-contained answers are easier for both readers and AI systems to use —
+ * not as decorative FAQ markup. Keep the answer visible on the page.
+ */
+interface Props {
+  question: string;
+  /** Heading level. Must fit the surrounding outline. */
+  level?: 2 | 3 | 4;
+  boxed?: boolean;
+  id?: string;
+}
+const { question, level = 3, boxed = false, id } = Astro.props;
+const Tag = `h${level}` as 'h2' | 'h3' | 'h4';
+---
+
+<div class={boxed ? 'answer answer--boxed' : 'answer'} id={id}>
+  <Tag>{question}</Tag>
+  <slot />
+</div>

@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
+import Schema from '../components/Schema.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { personSchema, websiteSchema } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Site-root-relative path of this page, e.g. '/about/'. */
+  path: string;
+  exactTitle?: boolean;
+  ogType?: 'website' | 'article' | 'profile';
+  publishedTime?: string;
+  noindex?: boolean;
+  /** Page-specific JSON-LD, built with src/lib/schema.ts. */
+  schemas?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  path,
+  exactTitle = false,
+  ogType = 'website',
+  publishedTime,
+  noindex = false,
+  schemas = [],
+} = Astro.props;
+
+const origin = Astro.site ? Astro.site.origin.replace(/\/$/, '') : site.origin;
+
+/* Person and WebSite ship on every page so the entity stays unambiguous
+   regardless of which page a crawler or AI system lands on first. */
+const allSchemas = [personSchema(origin), websiteSchema(origin), ...schemas];
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      path={path}
+      exactTitle={exactTitle}
+      ogType={ogType}
+      publishedTime={publishedTime}
+      noindex={noindex}
+    />
+    <Schema schemas={allSchemas} />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Hero from '../../components/Hero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import CTA from '../../components/CTA.astro';
+import { site } from '../../data/site';
+import { projects } from '../../data/projects';
+import { absolute } from '../../lib/paths';
+import { breadcrumbSchema, collectionSchema } from '../../lib/schema';
+
+const path = '/work/';
+const origin = Astro.site ? Astro.site.origin.replace(/\/$/, '') : site.origin;
+
+const schemas = [
+  collectionSchema(origin, absolute(path, Astro.site), projects),
+  breadcrumbSchema([
+    { name: 'Home', item: absolute('/', Astro.site) },
+    { name: 'Work' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Work & Case Studies"
+  description="Case studies in SEO, GEO and AI search strategy: a custom nonprofit website, an AI visibility platform concept, and portfolio-scale multifamily SEO."
+  path={path}
+  schemas={schemas}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Work' }]} />
+  </div>
+
+  <Hero
+    eyebrow="Work"
+    compact={true}
+    lead="Four case studies covering the range of what I do: strategy, measurement system design, implementation at scale, and the methodology underneath. Each one explains what I personally owned."
+  >
+    <Fragment slot="title">Case studies</Fragment>
+  </Hero>
+
+  <section class="section section--tight section--ruled">
+    <div class="container">
+      <h2 class="sr-only">All case studies</h2>
+      {projects.map((project, i) => (
+        <ProjectCard project={project} index={i + 1} level={3} />
+      ))}
+    </div>
+  </section>
+
+  <CTA
+    title="Looking for something specific?"
+    body="If there's a type of work you want to see that isn't here — technical audits, entity strategy, GA4 analysis — ask me directly."
+    primaryHref="/contact/"
+    primaryLabel="Get in touch"
+    secondaryHref="/about/"
+    secondaryLabel="About me"
+  />
+</BaseLayout>

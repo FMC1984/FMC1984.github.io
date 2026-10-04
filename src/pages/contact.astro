@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import { site } from '../data/site';
+import { url, absolute } from '../lib/paths';
+import { breadcrumbSchema, ids } from '../lib/schema';
+
+const path = '/contact/';
+const origin = Astro.site ? Astro.site.origin.replace(/\/$/, '') : site.origin;
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', item: absolute('/', Astro.site) },
+    { name: 'Contact' },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    url: absolute(path, Astro.site),
+    name: `Contact ${site.name}`,
+    isPartOf: { '@id': ids.website(origin) },
+    about: { '@id': ids.person(origin) },
+    mainEntity: { '@id': ids.person(origin) },
+  },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Tina Williamson about SEO, GEO, AEO and AI search strategy work — by email, LinkedIn or GitHub."
+  path={path}
+  schemas={schemas}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'Contact' }]} />
+  </div>
+
+  <Hero
+    eyebrow="Contact"
+    compact={true}
+    lead="Email is the most reliable way to reach me. I'm glad to talk through search strategy, AI visibility work, or a specific role."
+  >
+    <Fragment slot="title">Get in touch</Fragment>
+  </Hero>
+
+  <section class="section section--tight section--ruled">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:start;gap:var(--sp-6);">
+        <div>
+          <h2 style="font-size:var(--step-2);">Direct</h2>
+          <dl class="facts" style="max-width:34rem;">
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+            </div>
+            <div>
+              <dt>LinkedIn</dt>
+              <dd><a href={site.linkedin} rel="me noopener">linkedin.com/in/tinawilliamson</a></dd>
+            </div>
+            <div>
+              <dt>GitHub</dt>
+              <dd><a href={site.github} rel="me noopener">github.com/tinawilliamson</a></dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>{site.location}</dd>
+            </div>
+          </dl>
+
+          <p class="btn-row">
+            <a class="btn btn--primary" href={`mailto:${site.email}`}>Email me</a>
+            <a class="btn btn--ghost" href={url('/resume/')}>View résumé</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 style="font-size:var(--step-1);">What's useful to include</h2>
+          <p>
+            If you're reaching out about work, a couple of lines on any of these makes the first reply
+            much more useful:
+          </p>
+          <ul style="padding-left:1.1rem;margin:0 0 var(--sp-3);">
+            <li>What you're trying to accomplish, and by when</li>
+            <li>Whether this is one site or many</li>
+            <li>What's already in place — analytics access, Search Console, a CMS</li>
+            <li>Whether you need strategy, implementation, or both</li>
+          </ul>
+          <p class="text-muted" style="font-size:var(--step--1);margin-bottom:0;">
+            There's no contact form here on purpose. This is a static site, and a form would mean
+            routing your message through a third-party service — a direct email is simpler and more
+            private.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

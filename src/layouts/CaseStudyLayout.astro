@@ -1,0 +1,111 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CaseStudyMeta from '../components/CaseStudyMeta.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTA from '../components/CTA.astro';
+import { site } from '../data/site';
+import type { Project } from '../data/projects';
+import { relatedProjects } from '../data/projects';
+import { url, absolute } from '../lib/paths';
+import { breadcrumbSchema, caseStudySchema } from '../lib/schema';
+
+interface Props {
+  project: Project;
+  /** Overrides the meta description. Defaults to the project summary. */
+  description?: string;
+  /** In-page contents: must match the `id`s of the <h2>s in the slot content. */
+  sections: { id: string; label: string }[];
+}
+
+const { project, description, sections } = Astro.props;
+const path = `/work/${project.slug}/`;
+const pageUrl = absolute(path, Astro.site);
+const origin = Astro.site ? Astro.site.origin.replace(/\/$/, '') : site.origin;
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Work', href: '/work/' },
+  { name: project.title },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', item: absolute('/', Astro.site) },
+    { name: 'Work', item: absolute('/work/', Astro.site) },
+    { name: project.title },
+  ]),
+  caseStudySchema(origin, pageUrl, project),
+];
+
+const related = relatedProjects(project.slug);
+---
+
+<BaseLayout
+  title={project.seoTitle}
+  description={description ?? project.metaDescription}
+  path={path}
+  ogType="article"
+  publishedTime={project.published}
+  schemas={schemas}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={crumbs} />
+  </div>
+
+  <div class="container">
+    <header class="cs-header">
+      <p class="eyebrow">Case study · {project.org}</p>
+      <h1 class="cs-header__title">{project.headline}</h1>
+      <p class="cs-header__summary">{project.summary}</p>
+    </header>
+
+    <CaseStudyMeta project={project} />
+  </div>
+
+  <div class="container cs-body">
+    <div class="cs-body__grid">
+      <div class="prose measure-wide">
+        <slot />
+      </div>
+
+      <aside class="cs-toc" aria-labelledby="toc-heading">
+        <h2 id="toc-heading">On this page</h2>
+        <ol>
+          {sections.map((s) => (
+            <li><a href={`#${s.id}`}>{s.label}</a></li>
+          ))}
+        </ol>
+
+        <h2 style="margin-top:2rem;">Tools</h2>
+        <ul style="list-style:none;margin:0;padding:0;">
+          {project.tools.map((t) => (
+            <li style="border-top:1px solid var(--c-rule);padding:0.5rem 0;color:var(--c-body);">{t}</li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <section class="section section--sand section--ruled">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Related work"
+        title="More case studies"
+        linkHref={url('/work/')}
+        linkLabel="All work"
+      />
+      {related.map((p, i) => <ProjectCard project={p} index={i + 1} />)}
+    </div>
+  </section>
+
+  <CTA
+    title="Interested in this kind of work?"
+    body="I'm happy to talk through search strategy, AI visibility or a specific project."
+    primaryHref="/contact/"
+    primaryLabel="Get in touch"
+    secondaryHref="/resume/"
+    secondaryLabel="View résumé"
+  />
+</BaseLayout>

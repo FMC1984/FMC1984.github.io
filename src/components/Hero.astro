@@ -1,0 +1,38 @@
+---
+/**
+ * Page hero. Pass the headline through the `title` slot so individual words can
+ * be emphasised; use the `aside` slot for an optional figure column.
+ */
+interface Props {
+  eyebrow?: string;
+  lead?: string;
+  /** Small line of supporting detail under the lead. */
+  meta?: string;
+  /** Use a narrower, text-only hero (interior pages). */
+  compact?: boolean;
+}
+const { eyebrow, lead, meta, compact = false } = Astro.props;
+const hasAside = Astro.slots.has('aside') && !compact;
+---
+
+<section class="hero">
+  <div class="container">
+    <div class={hasAside ? 'hero__grid' : ''}>
+      <div>
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h1 class="hero__title" style={compact ? 'font-size:var(--step-4)' : undefined}>
+          <slot name="title" />
+        </h1>
+        {lead && <p class="hero__lead">{lead}</p>}
+        <slot name="actions" />
+        {meta && <p class="hero__meta">{meta}</p>}
+      </div>
+
+      {hasAside && (
+        <div>
+          <slot name="aside" />
+        </div>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+---
+import { site, nav } from '../data/site';
+import { url, isCurrent } from '../lib/paths';
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__brand" href={url('/')}>
+        Tina Williamson
+        <span>{site.role}</span>
+      </a>
+
+      <button
+        class="nav__toggle"
+        type="button"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        Menu
+      </button>
+
+      <div class="nav__menu" id="nav-menu" data-open="false">
+        <ul class="nav__list">
+          {nav.map((item) => (
+            <li>
+              <a
+                class="nav__link"
+                href={url(item.href)}
+                aria-current={isCurrent(item.href, pathname) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('nav-toggle');
+    var menu = document.getElementById('nav-menu');
+    if (!btn || !menu) return;
+
+    function setOpen(open) {
+      menu.setAttribute('data-open', open ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Close' : 'Menu';
+    }
+
+    btn.addEventListener('click', function () {
+      setOpen(menu.getAttribute('data-open') !== 'true');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  })();
+</script>

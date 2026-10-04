@@ -1,0 +1,18 @@
+---
+import type { Expertise } from '../data/experience';
+
+interface Props {
+  item: Expertise;
+  level?: 3 | 4;
+}
+const { item, level = 3 } = Astro.props;
+const Tag = `h${level}` as 'h3' | 'h4';
+---
+
+<div class="exp-item">
+  <Tag>{item.title}</Tag>
+  <p>{item.blurb}</p>
+  <ul>
+    {item.items.map((i) => <li>{i}</li>)}
+  </ul>
+</div>

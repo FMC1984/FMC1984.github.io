@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ExpertiseCard from '../components/ExpertiseCard.astro';
+import AnswerBlock from '../components/AnswerBlock.astro';
+import CTA from '../components/CTA.astro';
+import { site, toolGroups, education } from '../data/site';
+import { expertise } from '../data/experience';
+import { absolute } from '../lib/paths';
+import { breadcrumbSchema, profilePageSchema, faqSchema } from '../lib/schema';
+
+const path = '/about/';
+const origin = Astro.site ? Astro.site.origin.replace(/\/$/, '') : site.origin;
+
+const answer = {
+  q: 'What types of search strategies does Tina work on?',
+  a: 'Organic search strategy for websites and large website portfolios; technical SEO including structured data, crawlability and Core Web Vitals; local search and Google Business Profile optimization; content and FAQ systems built around search intent; GEO and AEO strategy for AI Overviews and answer engines; and analytics work in Google Analytics 4 and Google Search Console to turn performance data into prioritized recommendations.',
+};
+
+const schemas = [
+  profilePageSchema(origin, absolute(path, Astro.site)),
+  breadcrumbSchema([
+    { name: 'Home', item: absolute('/', Astro.site) },
+    { name: 'About' },
+  ]),
+  faqSchema([answer]),
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Tina Williamson works across SEO, GEO, AEO, analytics and technical implementation, with recent work in multifamily and AI search visibility."
+  path={path}
+  ogType="profile"
+  schemas={schemas}
+>
+  <div class="container">
+    <Breadcrumbs crumbs={[{ name: 'Home', href: '/' }, { name: 'About' }]} />
+  </div>
+
+  <Hero
+    eyebrow="About"
+    compact={true}
+    lead="I'm a search strategist. The short version: I started in search, kept following the work into analytics and implementation, and now spend most of my time on the question of how brands stay visible as search turns into answers."
+  >
+    <Fragment slot="title">
+      Search strategy that doesn't stop at the handoff.
+    </Fragment>
+  </Hero>
+
+  <!-- Story -------------------------------------------------------------- -->
+  <section class="section section--tight section--ruled">
+    <div class="container">
+      <div class="grid grid--2" style="gap:var(--sp-6);align-items:start;">
+        <div class="prose">
+          <h2>How I got here</h2>
+          <p>
+            My work has always sat between two groups that don't naturally speak the same language:
+            the people deciding what a brand should say, and the people responsible for whether a page
+            actually renders, loads and gets indexed. I learned both because projects kept stalling in
+            the gap between them.
+          </p>
+          <p>
+            In multifamily, that gap is expensive. A property website isn't one site — it's one of
+            dozens, each with its own market, competitive set and set of renter questions. A strategy
+            that only works when a specialist executes it by hand doesn't survive at that scale. So the
+            work became as much about building a repeatable method as about any single optimization:
+            what gets checked, in what order, with what evidence, and how you know it was done.
+          </p>
+          <p>
+            Analytics came out of the same pressure. When you're responsible for many sites, you can't
+            rely on intuition about what's working. Search Console and GA4 became the places I spend
+            real time — not for reporting, but for deciding what to do next and being able to defend it
+            to people who don't work in search.
+          </p>
+          <p>
+            AI search is the current version of that same problem. The question clients ask is shifting
+            from "where do we rank?" to "when someone asks an assistant about us, what does it say, and
+            is it right?" That's an answerable question, but answering it requires entity thinking,
+            source auditing and a measurement framework — which is what I've been building, both in
+            client work and as a product concept.
+          </p>
+          <p>
+            Alongside all of it, I build. I designed and developed the Douglas County Housing
+            Partnership website myself, and I use AI-assisted development workflows to implement things
+            I'd previously have had to specify and hand off. AI is part of how I work — for research,
+            analysis and implementation — not a substitute for judgment about what's worth doing.
+          </p>
+        </div>
+
+        <div>
+          <AnswerBlock question={answer.q} level={2} boxed={true}>
+            <p>{answer.a}</p>
+          </AnswerBlock>
+
+          <div class="card" style="margin-top:var(--sp-4);">
+            <h2 style="font-size:var(--step-1);">In short</h2>
+            <dl class="facts">
+              <div>
+                <dt>Focus</dt>
+                <dd>SEO, GEO, AEO and AI search visibility</dd>
+              </div>
+              <div>
+                <dt>Current role</dt>
+                <dd>Technical Specialist, REACH by RentCafé / Yardi</dd>
+              </div>
+              <div>
+                <dt>Industry depth</dt>
+                <dd>Multifamily and residential property marketing</dd>
+              </div>
+              <div>
+                <dt>Also</dt>
+                <dd>Freelance digital strategy and web development</dd>
+              </div>
+              <div>
+                <dt>Studying</dt>
+                <dd>{education.degree}, {education.concentration} — {education.school}</dd>
+              </div>
+              <div>
+                <dt>Based in</dt>
+                <dd>{site.location}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I work on ----------------------------------------------------- -->
+  <section class="section section--sand section--ruled" aria-labelledby="what-i-work-on">
+    <div class="container">
+      <SectionHeading
+        eyebrow="What I work on"
+        title="Six areas, one practice"
+        id="what-i-work-on"
+        intro="These aren't separate services. A typical engagement starts in one and immediately needs two others."
+      />
+      <div class="grid grid--2 grid--3">
+        {expertise.map((item) => <ExpertiseCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work --------------------------------------------------------- -->
+  <section class="section section--ruled" aria-labelledby="how-i-work">
+    <div class="container">
+      <SectionHeading eyebrow="Approach" title="How I work" id="how-i-work" />
+      <div class="grid grid--2 grid--3">
+        <div class="card--plain">
+          <h3 style="font-size:var(--step-1);">Diagnose before prescribing</h3>
+          <p class="text-muted" style="font-size:var(--step--1);margin:0;">
+            Search Console, GA4 and the actual pages first. Recommendations that skip the diagnosis
+            tend to be a list of best practices rather than a plan.
+          </p>
+        </div>
+        <div class="card--plain">
+          <h3 style="font-size:var(--step-1);">Build the method, not just the fix</h3>
+          <p class="text-muted" style="font-size:var(--step--1);margin:0;">
+            Anything that has to happen across many properties or pages needs to be documented,
+            checkable and repeatable by someone else.
+          </p>
+        </div>
+        <div class="card--plain">
+          <h3 style="font-size:var(--step-1);">Own the implementation</h3>
+          <p class="text-muted" style="font-size:var(--step--1);margin:0;">
+            I'd rather implement and QA the change than write a specification and hope. It's also how
+            recommendations stay realistic.
+          </p>
+        </div>
+        <div class="card--plain">
+          <h3 style="font-size:var(--step-1);">Use AI where it's actually better</h3>
+          <p class="text-muted" style="font-size:var(--step--1);margin:0;">
+            Research breadth, pattern-finding across many sites, first-draft structure, and
+            implementation speed. Not unsupervised publishing.
+          </p>
+        </div>
+        <div class="card--plain">
+          <h3 style="font-size:var(--step-1);">Say what the data supports</h3>
+          <p class="text-muted" style="font-size:var(--step--1);margin:0;">
+            Search work attracts overstatement. I'd rather report scope and process honestly than
+            attach a number to something I can't attribute.
+          </p>
+        </div>
+        <div class="card--plain">
+          <h3 style="font-size:var(--step-1);">Write for the reader first</h3>
+          <p class="text-muted" style="font-size:var(--step--1);margin:0;">
+            Content that's clear to a person is also the content AI systems can extract. Keyword
+            stuffing fails both audiences.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -------------------------------------------------------------- -->
+  <section class="section section--sand section--ruled" aria-labelledby="tools">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Toolset"
+        title="Tools and platforms"
+        id="tools"
+        intro="The tools matter less than the questions you bring to them, but these are the ones I'm in regularly."
+      />
+      <div class="grid grid--2 grid--3">
+        {toolGroups.map((group) => (
+          <div class="exp-item">
+            <h3>{group.name}</h3>
+            <ul>
+              {group.tools.map((t) => <li>{t}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Want the longer version?"
+    body="The case studies go deeper on method and implementation, and the experience page covers roles and ownership."
+    primaryHref="/work/"
+    primaryLabel="View case studies"
+    secondaryHref="/experience/"
+    secondaryLabel="Experience"
+  />
+</BaseLayout>
