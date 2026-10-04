@@ -1,0 +1,38 @@
+---
+/**
+ * Wireframe sphere — the globe motif from the banner's top-right corner:
+ * a circle crossed by foreshortened meridians and latitude lines, with a few
+ * nodes sitting on the surface.
+ *
+ * Decorative only: aria-hidden, non-interactive.
+ */
+const R = 120;
+/* Meridians: ellipses of decreasing width, giving the illusion of rotation. */
+const meridians = [1, 0.74, 0.46, 0.17].map((k) => +(R * k).toFixed(1));
+/* Latitudes: horizontal slices, narrower toward the poles. */
+const latitudes = [-0.78, -0.45, 0, 0.45, 0.78].map((t) => ({
+  cy: +(R * t).toFixed(1),
+  rx: +(R * Math.sqrt(Math.max(0, 1 - t * t))).toFixed(1),
+}));
+const nodes = [
+  { x: -62, y: -74 }, { x: 46, y: -92 }, { x: 104, y: -18 },
+  { x: 18, y: 36 }, { x: -92, y: 22 }, { x: 70, y: 74 },
+];
+---
+
+<svg
+  class="art art--orbit"
+  viewBox="-150 -150 300 300"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g fill="none" stroke="var(--c-gold)" stroke-width="0.7">
+    <circle r={R} stroke-opacity="0.34" />
+    {meridians.map((rx) => <ellipse rx={rx} ry={R} stroke-opacity="0.2" />)}
+    {latitudes.map((l) => <ellipse cy={l.cy} rx={l.rx} ry={Math.max(3, l.rx * 0.14)} stroke-opacity="0.18" />)}
+  </g>
+  <g fill="var(--c-gold)">
+    {nodes.map((n, i) => <circle cx={n.x} cy={n.y} r={i % 2 ? 1.5 : 2.4} fill-opacity={i % 2 ? 0.42 : 0.8} />)}
+  </g>
+</svg>

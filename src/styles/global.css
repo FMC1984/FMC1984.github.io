@@ -825,3 +825,33 @@ code, kbd {
   .art--constellation { opacity: 0.3; width: 70%; top: -2rem; right: -5rem; }
   .art--glyphs { opacity: 0.25; width: 72%; }
 }
+
+/* positions for the two additional motifs */
+
+.art--dots {
+  top: 0;
+  right: 0;
+  width: min(26rem, 46%);
+  height: 100%;
+  opacity: 0.5;
+}
+
+.art--orbit {
+  top: -5rem;
+  right: -6rem;
+  width: min(26rem, 46%);
+  opacity: 0.6;
+  -webkit-mask-image: radial-gradient(circle at 60% 40%, #000 35%, transparent 78%);
+  mask-image: radial-gradient(circle at 60% 40%, #000 35%, transparent 78%);
+}
+
+/* interior pages get a shorter version of the hero band */
+.flowband--slim { height: 92px; margin-top: var(--sp-4); }
+@media (min-width: 60rem) {
+  .flowband--slim { height: 120px; margin-top: var(--sp-5); }
+}
+
+@media (max-width: 59.99rem) {
+  .art--orbit { opacity: 0.32; top: -3rem; right: -7rem; width: 64%; }
+  .art--dots { opacity: 0.3; }
+}

@@ -8,6 +8,8 @@ import AnswerBlock from '../components/AnswerBlock.astro';
 import CTA from '../components/CTA.astro';
 import Constellation from '../components/Constellation.astro';
 import DataGlyphs from '../components/DataGlyphs.astro';
+import Orbit from '../components/Orbit.astro';
+import DotField from '../components/DotField.astro';
 import { education } from '../data/site';
 import { featuredProjects } from '../data/projects';
 import { expertise } from '../data/experience';
@@ -117,7 +119,8 @@ const answers = [
   </section>
 
   <!-- Expertise --------------------------------------------------------- -->
-  <section class="section section--ruled" aria-labelledby="expertise">
+  <section class="section section--ruled has-art" aria-labelledby="expertise">
+    <Orbit />
     <div class="container">
       <SectionHeading
         eyebrow="Core expertise"
@@ -227,7 +230,8 @@ const answers = [
   </section>
 
   <!-- Education --------------------------------------------------------- -->
-  <section class="section section--sand section--ruled" aria-labelledby="education">
+  <section class="section section--sand section--ruled has-art" aria-labelledby="education">
+    <DotField focusX={88} focusY={38} />
     <div class="container">
       <div class="grid grid--2" style="gap:var(--sp-6);align-items:start;">
         <div>

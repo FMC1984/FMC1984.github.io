@@ -1,0 +1,42 @@
+---
+/**
+ * Halftone dot grid with a radial falloff — the texture along the banner's
+ * right edge. Drawn with an SVG <pattern> rather than hundreds of <circle>
+ * elements, so the markup stays under 1 KB regardless of area covered.
+ *
+ * Decorative only: aria-hidden, non-interactive.
+ */
+interface Props {
+  /** Grid pitch in viewBox units. Larger = sparser. */
+  pitch?: number;
+  /** Where the field is densest, as percentages. */
+  focusX?: number;
+  focusY?: number;
+}
+const { pitch = 11, focusX = 85, focusY = 50 } = Astro.props;
+const id = `df-${Math.round(pitch * 100)}-${focusX}-${focusY}`;
+---
+
+<svg
+  class="art art--dots"
+  viewBox="0 0 400 300"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <pattern id={`${id}-p`} width={pitch} height={pitch} patternUnits="userSpaceOnUse">
+      <circle cx={pitch / 2} cy={pitch / 2} r="1.05" fill="var(--c-gold)" />
+    </pattern>
+    <radialGradient id={`${id}-m`} cx={`${focusX}%`} cy={`${focusY}%`} r="62%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.85" />
+      <stop offset="55%" stop-color="#fff" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+    </radialGradient>
+    <mask id={`${id}-k`}>
+      <rect width="400" height="300" fill={`url(#${id}-m)`} />
+    </mask>
+  </defs>
+  <rect width="400" height="300" fill={`url(#${id}-p)`} mask={`url(#${id}-k)`} />
+</svg>

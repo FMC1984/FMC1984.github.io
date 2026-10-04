@@ -4,6 +4,8 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CTA from '../components/CTA.astro';
+import DataGlyphs from '../components/DataGlyphs.astro';
+import Constellation from '../components/Constellation.astro';
 import { education, specialties } from '../data/site';
 import { roles } from '../data/experience';
 import { url, absolute } from '../lib/paths';
@@ -72,7 +74,8 @@ const schemas = [
   </section>
 
   <!-- Education ---------------------------------------------------------- -->
-  <section class="section section--sand section--ruled" aria-labelledby="education">
+  <section class="section section--sand section--ruled has-art" aria-labelledby="education">
+    <DataGlyphs />
     <div class="container">
       <SectionHeading
         eyebrow="Education"
@@ -116,7 +119,8 @@ const schemas = [
   </section>
 
   <!-- Specialties -------------------------------------------------------- -->
-  <section class="section section--ruled" aria-labelledby="specialties">
+  <section class="section section--ruled has-art" aria-labelledby="specialties">
+    <Constellation seed={31} count={20} />
     <div class="container">
       <SectionHeading
         eyebrow="Specialties"

@@ -1,5 +1,6 @@
 ---
 import { url } from '../lib/paths';
+import DotField from './DotField.astro';
 
 interface Props {
   title: string;
@@ -12,7 +13,8 @@ interface Props {
 const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
 ---
 
-<section class="cta">
+<section class="cta has-art">
+  <DotField />
   <div class="container">
     <div class="cta__inner">
       <h2 class="cta__title">{title}</h2>

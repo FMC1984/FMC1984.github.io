@@ -37,9 +37,7 @@ const hasAside = Astro.slots.has('aside') && !compact;
     </div>
   </div>
 
-  {!compact && (
-    <div class="flowband">
-      <FlowLines />
-    </div>
-  )}
+  <div class={compact ? 'flowband flowband--slim' : 'flowband'}>
+    <FlowLines />
+  </div>
 </section>
