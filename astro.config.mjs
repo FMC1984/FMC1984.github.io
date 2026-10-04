@@ -16,7 +16,15 @@ export default defineConfig({
   site: 'https://fmc1984.github.io',
   base: '/',
   trailingSlash: 'always',
-  build: { format: 'directory' },
+  build: {
+    format: 'directory',
+    // Inline the stylesheet into every page. It is ~4.4 KB gzipped, so this
+    // removes a render-blocking request AND removes a real failure mode on
+    // GitHub Pages: HTML is served with max-age=600, so for ten minutes after
+    // a deploy a cached page could reference a hashed CSS file that no longer
+    // exists and render completely unstyled.
+    inlineStylesheets: 'always',
+  },
   integrations: [sitemap()],
   prefetch: false,
 });
