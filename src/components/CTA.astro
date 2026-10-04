@@ -1,6 +1,6 @@
 ---
 import { url } from '../lib/paths';
-import DotField from './DotField.astro';
+import WaveArt from './WaveArt.astro';
 
 interface Props {
   title: string;
@@ -14,7 +14,7 @@ const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } 
 ---
 
 <section class="cta has-art">
-  <DotField />
+  <WaveArt variant={5} anchor="bottom-right" opacity={0.26} width="min(34rem, 56%)" />
   <div class="container">
     <div class="cta__inner">
       <h2 class="cta__title">{title}</h2>

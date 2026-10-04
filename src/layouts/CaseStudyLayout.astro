@@ -5,7 +5,7 @@ import CaseStudyMeta from '../components/CaseStudyMeta.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CTA from '../components/CTA.astro';
-import Orbit from '../components/Orbit.astro';
+import WaveArt from '../components/WaveArt.astro';
 import { site } from '../data/site';
 import type { Project } from '../data/projects';
 import { relatedProjects } from '../data/projects';
@@ -114,7 +114,7 @@ const related = relatedProjects(project.slug);
   </div>
 
   <section class="section section--sand section--ruled has-art">
-    <Orbit />
+    <WaveArt variant={3} anchor="top-right" opacity={0.24} />
     <div class="container">
       <SectionHeading
         eyebrow="Related work"

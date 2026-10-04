@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { projects } from '../data/projects';
 import { url } from '../lib/paths';
-import Orbit from '../components/Orbit.astro';
+import WaveArt from '../components/WaveArt.astro';
 ---
 
 <BaseLayout
@@ -12,7 +12,7 @@ import Orbit from '../components/Orbit.astro';
   noindex={true}
 >
   <section class="section has-art">
-    <Orbit />
+    <WaveArt variant={2} anchor="top-right" opacity={0.3} />
     <div class="container">
       <p class="eyebrow">404</p>
       <h1 style="font-size:var(--step-4);">That page doesn't exist.</h1>

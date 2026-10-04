@@ -1,0 +1,51 @@
+---
+/**
+ * Section background motif — one of Tina's gold wave variants.
+ *
+ * Like the hero band, the artwork is an ALPHA MASK and the gold is painted
+ * from --c-gold, so every motif on the site is the same colour by construction
+ * and a palette change carries through without re-exporting anything.
+ *
+ * These replaced an earlier set of unrelated SVG motifs (constellation, globe,
+ * instrument panel). Four variations on one idea reads as a system; four
+ * different ideas read as clutter.
+ *
+ * Decorative only: aria-hidden, non-interactive, removed in the light palette.
+ */
+import { url } from '../lib/paths';
+
+interface Props {
+  /** Which variant, 2–5. */
+  variant?: 2 | 3 | 4 | 5;
+  /** Corner to anchor to. */
+  anchor?: 'top-right' | 'bottom-right' | 'top-left' | 'bottom-left';
+  /** 0–1. Keep low: this sits behind running text. */
+  opacity?: number;
+  /** Width as a share of the section. */
+  width?: string;
+  flip?: boolean;
+}
+
+const {
+  variant = 2,
+  anchor = 'top-right',
+  opacity = 0.3,
+  width = 'min(40rem, 62%)',
+  flip = false,
+} = Astro.props;
+
+const src = url(`/images/art/wave-${variant}.webp`);
+
+const anchors: Record<string, string> = {
+  'top-right': 'top:-2rem; right:-4rem;',
+  'bottom-right': 'bottom:-2rem; right:-4rem;',
+  'top-left': 'top:-2rem; left:-4rem;',
+  'bottom-left': 'bottom:-2rem; left:-4rem;',
+};
+---
+
+<div
+  class="art art--wave"
+  aria-hidden="true"
+  style={`${anchors[anchor]} width:${width}; opacity:${opacity}; --wave-mask:url('${src}');${flip ? ' transform:scaleX(-1);' : ''}`}
+></div>

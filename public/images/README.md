@@ -40,6 +40,14 @@ for w, name in ((1400, 'filament-wave-mask.webp'), (820, 'filament-wave-mask-sm.
 The RGB channels are constant white and carry no information — only the alpha
 matters. That is why it compresses so well.
 
+`art/wave-2.webp` … `wave-5.webp` are the same idea at section scale, used by
+`WaveArt.astro` as background motifs. Same pipeline, same `art-source/`
+originals (`GoldWave2.png` … `GoldWave5.png`), just sized to 1000px wide.
+
+Every motif on the site is one of these waves. That is deliberate: four
+variations on one idea reads as a system, where four unrelated devices read as
+clutter.
+
 ## Before you add an image
 
 1. **Resize it.** Nothing wider than ~1600px. A full-page screenshot straight

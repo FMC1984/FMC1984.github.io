@@ -7,7 +7,7 @@ import CTA from '../../components/CTA.astro';
 import { site } from '../../data/site';
 import { projects, searchProjects, dataProjects, disciplineLabels } from '../../data/projects';
 import SectionHeading from '../../components/SectionHeading.astro';
-import Constellation from '../../components/Constellation.astro';
+import WaveArt from '../../components/WaveArt.astro';
 import { absolute } from '../../lib/paths';
 import { breadcrumbSchema, collectionSchema } from '../../lib/schema';
 
@@ -42,7 +42,7 @@ const schemas = [
   </Hero>
 
   <section class="section section--tight section--ruled has-art" aria-labelledby="search-work">
-    <Constellation seed={19} count={18} />
+    <WaveArt variant={2} anchor="top-right" opacity={0.26} />
     <div class="container">
       <SectionHeading
         eyebrow="Practice"
