@@ -763,13 +763,13 @@ code, kbd {
 
 .flowband {
   margin-top: var(--sp-5);
-  height: 190px;
+  height: 215px;
   overflow: hidden;
   border-top: 1px solid var(--c-rule);
 }
 
 @media (min-width: 60rem) {
-  .flowband { height: 265px; margin-top: var(--sp-6); }
+  .flowband { height: 300px; margin-top: var(--sp-6); }
 }
 
 .flowlines {
@@ -848,7 +848,7 @@ code, kbd {
 /* interior pages get a shorter version of the hero band */
 .flowband--slim { height: 120px; margin-top: var(--sp-4); }
 @media (min-width: 60rem) {
-  .flowband--slim { height: 160px; margin-top: var(--sp-5); }
+  .flowband--slim { height: 185px; margin-top: var(--sp-5); }
 }
 
 @media (max-width: 59.99rem) {
