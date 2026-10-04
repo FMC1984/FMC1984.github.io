@@ -2,6 +2,10 @@
 
 Portfolio site for **Tina Williamson** — SEO, GEO & AI Search Strategist.
 
+Dark editorial: cool near-black ground, antique gold, system serif headlines.
+The palette is sampled from Tina's LinkedIn banner so the site and her profile
+read as one brand.
+
 Built with [Astro](https://astro.build), plain HTML and CSS, and about twenty
 lines of JavaScript (the mobile menu). No UI framework, no CSS framework, no
 webfonts, no analytics by default, no backend. It builds to static files and
@@ -78,6 +82,10 @@ Then open <http://localhost:4321>.
     │       ├── index.astro         /work/
     │       └── <slug>.astro        /work/<slug>/
     └── styles/global.css           the entire design system
+                                    (`:root` is the dark theme; the original
+                                     warm-ivory palette lives under
+                                     `:root[data-theme="light"]` — set that
+                                     attribute on `<html>` to switch back)
 ```
 
 **Components:** `BaseHead` (all meta tags), `Schema` (JSON-LD), `Nav`, `Footer`,
@@ -461,6 +469,9 @@ The site is built to be an example of the work, so a few things are deliberate.
 **Performance**
 - No webfonts. Headlines use a system serif stack, body copy a system sans stack,
   so there are zero font requests and no layout shift from font swapping
+- The gold line-work closing the hero is inline SVG generated at build time —
+  about 4 KB in the HTML, versus ~150 KB for the equivalent JPEG, and it stays
+  sharp at any resolution
 - One stylesheet, no CSS framework
 - ~20 lines of JavaScript total, inline, for the mobile menu
 - No images in the chrome of the site; the hero figure is CSS and text
@@ -471,9 +482,10 @@ The site is built to be an example of the work, so a few things are deliberate.
 - The mobile menu is a real `<button>` with `aria-expanded`, closes on `Escape`
 - Semantic landmarks: `<header>`, `<nav aria-label>`, `<main>`, `<footer>`
 - `aria-current="page"` on the active nav item
-- Text contrast meets WCAG AA throughout, in both light and dark mode
+- Text contrast meets WCAG AA throughout — every token pair is 6.3:1 or better
+- Interactive borders use `--c-control` at 3.3:1, satisfying WCAG 1.4.11 for
+  non-text contrast (a card hairline can be subtle; a button's edge cannot)
 - `prefers-reduced-motion` honoured
-- Dark mode via `prefers-color-scheme`, with its own checked contrast values
 
 ---
 

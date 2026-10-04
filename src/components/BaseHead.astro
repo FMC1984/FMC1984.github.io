@@ -73,8 +73,8 @@ const ogImageUrl = site.ogImageEnabled ? absolute(site.ogImage, Astro.site) : nu
 {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 {ogImageUrl && <meta name="twitter:image:alt" content={site.ogImageAlt} />}
 
-<meta name="theme-color" content="#fbf8f3" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#15120f" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0a0d12" />
+<meta name="color-scheme" content="dark" />
 
 <link rel="sitemap" href={url('/sitemap-index.xml')} />
 <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />

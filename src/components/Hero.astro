@@ -1,4 +1,5 @@
 ---
+import FlowLines from './FlowLines.astro';
 /**
  * Page hero. Pass the headline through the `title` slot so individual words can
  * be emphasised; use the `aside` slot for an optional figure column.
@@ -35,4 +36,10 @@ const hasAside = Astro.slots.has('aside') && !compact;
       )}
     </div>
   </div>
+
+  {!compact && (
+    <div class="flowband">
+      <FlowLines />
+    </div>
+  )}
 </section>

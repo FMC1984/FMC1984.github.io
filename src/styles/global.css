@@ -1,32 +1,46 @@
 /* ==========================================================================
    Design system — Tina Williamson portfolio
-   Warm editorial neutrals, system font stacks (zero webfont requests),
-   light + dark, all tokens defined once here.
+   Dark editorial: cool near-black ground, antique gold, system font stacks
+   (zero webfont requests). All tokens defined once here.
    ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Palette sampled directly from Tina's LinkedIn banner:
+     ground  #0a0d12  (cool near-black, blue channel highest)
+     lines   #c1a173  (antique gold)
+     flare   #ffefc6  (gold highlight core)
+     text    #d8d9dd  (cool off-white)
+   Dark is the default so the site matches the banner for every visitor.
+   The original warm-ivory palette is kept below under [data-theme="light"];
+   setting that attribute on <html> switches the whole site back.
+   --------------------------------------------------------------------------- */
 
 :root {
   /* Surfaces */
-  --c-bg:        #fbf8f3; /* warm ivory */
-  --c-paper:     #fffdfa; /* cards */
-  --c-sand:      #f2ebe0; /* alternating sections */
-  --c-rule:      #e2d9ca; /* hairlines */
-  --c-rule-strong: #cfc2ad;
+  --c-bg:        #0a0d12; /* banner ground */
+  --c-paper:     #11151c; /* cards */
+  --c-sand:      #0d1116; /* alternating sections */
+  --c-rule:      #222a34; /* hairlines, decorative */
+  --c-rule-strong: #39424f; /* stronger hairlines, decorative */
+  --c-control:   #5c6675; /* interactive borders  ~3.3:1 — WCAG 1.4.11 */
 
-  /* Text */
-  --c-ink:       #1e1b17; /* headings, strong text   ~15.6:1 */
-  --c-body:      #38332c; /* body copy               ~11.3:1 */
-  --c-muted:     #6b6358; /* secondary               ~5.6:1  */
+  /* Text — all ≥ 6.9:1 on --c-bg */
+  --c-ink:       #e8eaee; /* headings            ~16.0:1 */
+  --c-body:      #c3c8d0; /* body copy           ~11.3:1 */
+  --c-muted:     #949caa; /* secondary            ~6.9:1 */
 
-  /* Accents */
-  --c-olive:     #4a5a3a; /* primary accent          ~7.0:1  */
-  --c-olive-ink: #3c4a2f;
-  --c-gold:      #8a6b22; /* small accents           ~4.7:1  */
-  --c-brown:     #3a2a1e;
-  --c-wash:      #eef0e6; /* olive-tinted wash */
+  /* Accents — gold replaces the olive of the light theme */
+  --c-olive:     #c9b088; /* links                ~9.1:1 */
+  --c-olive-ink: #ddc89b; /* link hover          ~11.4:1 */
+  --c-gold:      #c8a87c; /* eyebrows, accents    ~8.3:1 */
+  --c-brown:     #e0cdb6;
+  --c-wash:      #151a21; /* tinted panel */
+  --c-flare:     #ffefc6; /* gold highlight core, decorative only */
 
   /* Focus */
-  --c-focus:     #8a6b22;
+  --c-focus:     #ffe1ad;
 
+  /* --- shared, theme-independent ----------------------------------------- */
   /* Type */
   --f-serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
   --f-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -54,24 +68,32 @@
   --radius: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --c-bg:        #15120f;
-    --c-paper:     #1c1813;
-    --c-sand:      #1f1b16;
-    --c-rule:      #332c24;
-    --c-rule-strong: #4a4036;
-    --c-ink:       #f6f1e8;
-    --c-body:      #e2d9cc;
-    --c-muted:     #b6ab9b;
-    --c-olive:     #a9bc8a;
-    --c-olive-ink: #bdcea0;
-    --c-gold:      #d9b463;
-    --c-brown:     #e0cdb6;
-    --c-wash:      #20241b;
-    --c-focus:     #d9b463;
-  }
+:root[data-theme="light"] {
+  /* Original warm-editorial palette. Set data-theme="light" on <html> to use. */
+  --c-bg:        #fbf8f3; /* warm ivory */
+  --c-paper:     #fffdfa; /* cards */
+  --c-sand:      #f2ebe0; /* alternating sections */
+  --c-rule:      #e2d9ca; /* hairlines */
+  --c-rule-strong: #cfc2ad;
+  --c-control:   #8d8373; /* interactive borders  ~3.4:1 */
+
+  /* Text */
+  --c-ink:       #1e1b17; /* headings, strong text   ~15.6:1 */
+  --c-body:      #38332c; /* body copy               ~11.3:1 */
+  --c-muted:     #6b6358; /* secondary               ~5.6:1  */
+
+  /* Accents */
+  --c-olive:     #4a5a3a; /* primary accent          ~7.0:1  */
+  --c-olive-ink: #3c4a2f;
+  --c-gold:      #8a6b22; /* small accents           ~4.7:1  */
+  --c-brown:     #3a2a1e;
+  --c-wash:      #eef0e6; /* olive-tinted wash */
+
+  /* Focus */
+  --c-focus:     #8a6b22;
+
 }
+
 
 /* --------------------------------------------------------------- reset */
 
@@ -222,11 +244,7 @@ code, kbd {
 .btn--primary { background: var(--c-ink); color: var(--c-bg); }
 .btn--primary:hover { background: var(--c-olive-ink); border-color: var(--c-olive-ink); color: var(--c-bg); }
 
-@media (prefers-color-scheme: dark) {
-  .btn--primary:hover { color: var(--c-bg); }
-}
-
-.btn--ghost { background: transparent; color: var(--c-ink); border-color: var(--c-rule-strong); }
+.btn--ghost { background: transparent; color: var(--c-ink); border-color: var(--c-control); }
 .btn--ghost:hover { border-color: var(--c-ink); color: var(--c-ink); background: var(--c-paper); }
 
 .btn-row {
@@ -316,7 +334,7 @@ code, kbd {
   text-transform: uppercase;
   color: var(--c-ink);
   background: transparent;
-  border: 1px solid var(--c-rule-strong);
+  border: 1px solid var(--c-control);
   border-radius: var(--radius);
   padding: 0.5rem 0.75rem;
   cursor: pointer;
@@ -737,3 +755,32 @@ code, kbd {
 }
 .text-muted { color: var(--c-muted); }
 .mt-0 { margin-top: 0; }
+
+/* --------------------------------------------------------------- flowlines */
+
+/* A full-bleed band of gold filaments closing the hero — the site's recurring
+   brand device, echoing Tina's LinkedIn banner. Decorative only. */
+
+.flowband {
+  margin-top: var(--sp-5);
+  height: 150px;
+  overflow: hidden;
+  border-top: 1px solid var(--c-rule);
+}
+
+@media (min-width: 60rem) {
+  .flowband { height: 200px; margin-top: var(--sp-6); }
+}
+
+.flowlines {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* soften where the band meets the rule above it */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 28%);
+}
+
+/* the artwork is a dark-theme device; hide it in the light palette */
+:root[data-theme="light"] .flowband { display: none; }
