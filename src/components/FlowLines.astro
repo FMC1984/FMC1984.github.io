@@ -1,98 +1,23 @@
 ---
 /**
- * Gold filament band — the signature device.
+ * Gold filament band — the signature device, using Tina's own artwork.
  *
- * Structure, taken from the reference artwork: the ribbon splays wide at the
- * left tail, pinches to a WAIST, opens into a lens-shaped bulge, pinches to a
- * SECOND waist, then splays wide again into the right tail.
+ * The artwork is stored as an ALPHA MASK (greyscale WebP, ~26 KB) rather than a
+ * full-colour image (~152 KB for the same thing). The gold comes from
+ * --c-gold, so the band always matches the palette rather than carrying a
+ * baked-in colour that could drift from it.
  *
- *   y(x) = baseline(x) + t · amplitude(x) · sin(phase(x))
- *
- * The sine is what does the work. Where it crosses zero the filaments converge
- * — that is a waist — and because it changes sign there, the bundle inverts:
- * the filament on top emerges underneath. That inversion is the twist. An
- * unsigned width pinches without crossing; a single waist gives an hourglass.
- *
- * `phase` is piecewise linear rather than a plain sinusoid so the two waists
- * land where we want them AND the tails still reach full width — a constant
- * period would put the tails near a zero crossing and collapse them.
- *
- * Deliberately restrained: no glow, no bloom, moderate stroke opacity.
- * Decorative only — aria-hidden.
+ * Decorative only: aria-hidden, non-interactive, and it degrades to nothing
+ * rather than to a gold rectangle where mask-image is unsupported.
  */
+import { url } from '../lib/paths';
 
-const N = 40;                 // filaments
-
-/* The viewBox is proportioned to match the band's own aspect, so nothing is
-   cropped by `slice`. A viewBox much wider than the band squashes the wave
-   flat — the reference artwork is a tall composition and needs the room. */
-const VW = 1200;
-const VH = 300;
-
-const X0 = -110;              // left tail, off-canvas
-const W1 = 370;               // first waist
-const W2 = 860;               // second waist
-const X1 = 1310;              // right tail, off-canvas
-const STEP = 26;
-
-/** Piecewise phase: −π/2 at the left tail, 0 and π at the waists, 3π/2 right. */
-function phase(x: number): number {
-  if (x < W1) return (-Math.PI / 2) * ((W1 - x) / (W1 - X0));
-  if (x < W2) return Math.PI * ((x - W1) / (W2 - W1));
-  return Math.PI + (Math.PI / 2) * ((x - W2) / (X1 - W2));
-}
-
-/** Half-width envelope: widest at the tails, tighter through the bulge. */
-function amplitude(x: number): number {
-  if (x < W1) return 82 + 40 * ((W1 - x) / (W1 - X0));
-  if (x < W2) return 82;
-  return 82 + 22 * ((x - W2) / (X1 - W2));
-}
-
-/** Centreline: descends overall, with one slow wave so it is not a straight run. */
-const baseline = (x: number) => 150 - 46 * Math.sin((x + 260) / 370);
-
-const xs: number[] = [];
-for (let x = X0; x <= X1; x += STEP) xs.push(x);
-if (xs[xs.length - 1] !== X1) xs.push(X1);
-
-const lines = Array.from({ length: N }, (_, i) => {
-  const t = i / (N - 1) - 0.5;          // −0.5 … 0.5
-  const points = xs
-    .map((x) => {
-      const y = baseline(x) + t * 2 * amplitude(x) * Math.sin(phase(x));
-      return `${x},${y.toFixed(1)}`;
-    })
-    .join(' ');
-
-  const centrality = Math.max(0, 1 - Math.abs(t) * 0.95);
-  const opacity = (0.34 + centrality * 0.34).toFixed(3);
-
-  return { points, opacity };
-});
+const mask = url('/images/art/filament-wave-mask.webp');
+const maskSm = url('/images/art/filament-wave-mask-sm.webp');
 ---
 
-<svg
+<div
   class="flowlines"
-  viewBox={`0 0 ${VW} ${VH}`}
-  preserveAspectRatio="xMidYMid slice"
   aria-hidden="true"
-  focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs>
-    <!-- Fades at BOTH ends so the tails dissolve rather than being cut off. -->
-    <linearGradient id="fl-stroke" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="var(--c-gold)" stop-opacity="0.05" />
-      <stop offset="14%"  stop-color="var(--c-gold)" stop-opacity="0.52" />
-      <stop offset="34%"  stop-color="var(--c-gold)" stop-opacity="0.80" />
-      <stop offset="62%"  stop-color="var(--c-gold)" stop-opacity="0.74" />
-      <stop offset="84%"  stop-color="var(--c-gold)" stop-opacity="0.46" />
-      <stop offset="100%" stop-color="var(--c-gold)" stop-opacity="0.06" />
-    </linearGradient>
-  </defs>
-
-  <g fill="none" stroke="url(#fl-stroke)" stroke-width="0.75" stroke-linejoin="round">
-    {lines.map((l) => <polyline points={l.points} stroke-opacity={l.opacity} />)}
-  </g>
-</svg>
+  style={`--flow-mask: url('${mask}'); --flow-mask-sm: url('${maskSm}')`}
+></div>
