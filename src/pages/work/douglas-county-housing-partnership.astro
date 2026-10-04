@@ -2,6 +2,7 @@
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
 import { getProject } from '../../data/projects';
+import { url } from '../../lib/paths';
 
 const project = getProject('douglas-county-housing-partnership');
 
@@ -122,24 +123,39 @@ const sections = [
   <section class="cs-section" id="screens">
     <h2>The site</h2>
     <p class="text-muted" style="font-size:var(--step--1);">
-      Screenshots to be added. Each frame below names the exact file path to drop the image at.
+      The live site is at
+      <a href="https://douglascountyhousingpartnership.org/" rel="noopener">douglascountyhousingpartnership.org</a>.
     </p>
 
-    <ImagePlaceholder
-      label="Homepage — desktop"
-      description="Full homepage at desktop width, showing the primary audience pathways."
-      path="/images/projects/dchp/homepage-desktop.png"
-      caption="Homepage: primary pathways above the fold, programs and resources below."
-      ratio="tall"
-    />
+    <figure class="ph">
+      <img
+        src={url('/images/projects/dchp/homepage-desktop.webp')}
+        width="800"
+        height="556"
+        alt="Douglas County Housing Partnership homepage at desktop width: a headline reading 'Housing Help for Douglas County Residents' over a photograph of two residents, with 'Find Housing' and 'Contact DCHP' as the two primary actions, and a 'Find What You Need' section beginning below."
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        Homepage: one sentence explaining who the organization serves, and two
+        clear routes — find housing, or talk to someone.
+      </figcaption>
+    </figure>
 
-    <ImagePlaceholder
-      label="Homepage — mobile"
-      description="Homepage at mobile width, showing the collapsed navigation and stacked layout."
-      path="/images/projects/dchp/homepage-mobile.png"
-      caption="Mobile layout, where most need-driven traffic arrives."
-      ratio="square"
-    />
+    <figure class="ph ph--phone">
+      <img
+        src={url('/images/projects/dchp/homepage-mobile.webp')}
+        width="640"
+        height="1109"
+        alt="The same homepage at phone width: the navigation collapses to a labelled Menu button, the headline stacks over three lines, and the two primary actions become full-width buttons."
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        Mobile, where most need-driven traffic arrives. The two actions become
+        full-width targets and the navigation collapses behind a labelled button.
+      </figcaption>
+    </figure>
 
     <ImagePlaceholder
       label="Program page"

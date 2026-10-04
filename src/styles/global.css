@@ -855,3 +855,14 @@ code, kbd {
   .art--orbit { opacity: 0.32; top: -3rem; right: -7rem; width: 64%; }
   .art--dots { opacity: 0.3; }
 }
+
+/* real screenshots inside the .ph figure wrapper */
+.ph img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--c-rule);
+  border-radius: var(--radius);
+  background: var(--c-paper);
+}
+.ph--phone img { max-width: 20rem; }
+.ph--phone { display: flex; flex-direction: column; align-items: flex-start; }
