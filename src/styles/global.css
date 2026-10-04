@@ -22,14 +22,15 @@
   --c-sand:      #0d1116; /* alternating sections */
   --c-rule:      #222a34; /* hairlines, decorative */
   --c-rule-strong: #39424f; /* stronger hairlines, decorative */
-  --c-control:   #747d8c; /* interactive borders — 3.35:1 even on the
-                             lightest surface the background gradient creates;
-                             WCAG 1.4.11 wants 3:1 */
+  --c-control:   #858e9d; /* interactive borders — 3.2:1 even where a wave
+                             motif passes behind a button edge (WCAG 1.4.11
+                             wants 3:1 for a control's boundary) */
 
   /* Text — all ≥ 6.9:1 on --c-bg */
   --c-ink:       #e8eaee; /* headings            ~16.0:1 */
   --c-body:      #c3c8d0; /* body copy           ~11.3:1 */
-  --c-muted:     #949caa; /* secondary            ~6.9:1 */
+  --c-muted:     #b0b6c0; /* secondary — light enough to stay above 4.5:1
+                             even where a wave motif passes behind it */
 
   /* Accents — gold replaces the olive of the light theme */
   --c-olive:     #c9b088; /* links                ~9.1:1 */
@@ -879,7 +880,9 @@ code, kbd {
 /* wave motifs — see WaveArt.astro */
 
 .art--wave {
-  aspect-ratio: 1000 / 460;
+  left: 0;
+  right: 0;
+  width: 100%;
   pointer-events: none;
 }
 
@@ -888,8 +891,10 @@ code, kbd {
     background: var(--c-gold);
     -webkit-mask-image: var(--wave-mask);
     mask-image: var(--wave-mask);
-    -webkit-mask-size: contain;
-    mask-size: contain;
+    /* `cover` spans the full width and crops vertically, which is what makes
+       the wave read as crossing the page rather than sitting in a corner. */
+    -webkit-mask-size: cover;
+    mask-size: cover;
     -webkit-mask-position: center;
     mask-position: center;
     -webkit-mask-repeat: no-repeat;
@@ -898,7 +903,7 @@ code, kbd {
 }
 
 @media (max-width: 59.99rem) {
-  .art--wave { opacity: 0.16 !important; width: 78% !important; }
+  .art--wave { opacity: 0.14 !important; }
 }
 
 /* real screenshots inside the .ph figure wrapper */
