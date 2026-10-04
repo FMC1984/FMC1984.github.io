@@ -15,6 +15,31 @@ images/
     └── geo-aeo/             GEO / AEO Search Strategy
 ```
 
+## The filament wave
+
+`art/filament-wave-mask.webp` is not a picture — it is an **alpha mask**. The
+gold is painted by CSS from `--c-gold` and shows through the mask, so the band
+always matches the palette and the file is a third the size of the equivalent
+colour image.
+
+Originals live in `art-source/` (outside `public/`, so they are never
+deployed). To regenerate after replacing one:
+
+```python
+from PIL import Image
+alpha = Image.open('art-source/wave-original.png').convert('RGBA').getchannel('A')
+alpha = alpha.crop(alpha.getbbox())            # trim transparent margin
+for w, name in ((1400, 'filament-wave-mask.webp'), (820, 'filament-wave-mask-sm.webp')):
+    a = alpha.resize((w, round(alpha.height * w / alpha.width)), Image.LANCZOS)
+    white = Image.new('L', a.size, 255)
+    Image.merge('RGBA', (white, white, white, a)).save(
+        f'public/images/art/{name}', 'WEBP', quality=35, alpha_quality=70,
+        method=6, exact=True)
+```
+
+The RGB channels are constant white and carry no information — only the alpha
+matters. That is why it compresses so well.
+
 ## Before you add an image
 
 1. **Resize it.** Nothing wider than ~1600px. A full-page screenshot straight
