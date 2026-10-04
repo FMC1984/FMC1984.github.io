@@ -2,13 +2,14 @@
 /**
  * Gold filament band — the signature device, echoing Tina's LinkedIn banner.
  *
- * Modelled as a RIBBON, not a fan. Earlier attempts radiated every filament
- * from a single point, which always reads as a cone no matter how the curve is
- * tuned. Here each filament follows the same undulating baseline, offset by its
- * own position in the ribbon; the ribbon's width pinches to a waist at one x
- * and opens out either side. That is what produces the twist-and-sweep.
+ * Modelled as a RIBBON, not a fan. Radiating every filament from a single point
+ * reads as a cone no matter how the curve is tuned. Here each filament follows
+ * the same undulating baseline, offset by its position in the ribbon, and the
+ * ribbon's width is SIGNED about a waist — so the bundle converges, inverts and
+ * opens out again. The inversion is the twist; without it the band merely
+ * pinches.
  *
- *   y(x) = baseline(x) + t · width(x)
+ *   y(x) = baseline(x) + t · width(x),  width signed about the waist
  *
  * Brightness comes from the strokes, not from a glow behind them.
  *
@@ -25,12 +26,36 @@ const X1 = 1480;
 const STEP = 45;               // sampling pitch; coarser = smaller markup
 const WAIST = 300;             // where the ribbon pinches
 
-/** Gentle S down the length of the band. */
-const baseline = (x: number) => 132 + 54 * Math.sin((x - 60) / 560);
+/**
+ * The sheet's centreline. It has to have real SLOPE where the ribbon crosses
+ * itself: a flat centreline makes the crossing horizontal and the whole band
+ * reads as a symmetric bowtie. A sigmoid descending through the waist makes the
+ * crossing diagonal, which is what reads as a twist.
+ */
+const baseline = (x: number) =>
+  80 +
+  112 / (1 + Math.exp(-(x - 340) / 200)) +   // descends steeply through the waist
+  10 * Math.sin((x + 150) / 260);            // slight undulation on top
 
-/** Ribbon half-width: tight at the waist, opening faster to the right. */
-const halfWidth = (x: number) =>
-  x < WAIST ? 16 + (WAIST - x) * 0.26 : 16 + (x - WAIST) * 0.108;
+/**
+ * SIGNED ribbon half-width — this is what produces the twist.
+ *
+ * It is negative left of the waist and positive right of it, passing through
+ * zero at the waist itself. So every filament converges to the waist and then
+ * emerges on the opposite side of the bundle: the filament running along the
+ * top at the left runs along the bottom at the right. An unsigned width (the
+ * obvious version) keeps the filaments in order and merely pinches them, which
+ * looks like a flattened ribbon rather than a twist.
+ */
+const halfWidth = (x: number) => {
+  const d = x - WAIST;
+  /* tanh saturates: the bundle opens quickly either side of the waist, then
+     holds a near-constant thickness. Linear growth gives straight-sided
+     triangles meeting at a point — an hourglass, not a flowing sheet. */
+  return d < 0
+    ? -66 * Math.tanh(-d / 230)
+    : 92 * Math.tanh(d / 380);
+};
 
 const xs: number[] = [];
 for (let x = X0; x <= X1; x += STEP) xs.push(x);
