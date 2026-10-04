@@ -22,7 +22,9 @@
   --c-sand:      #0d1116; /* alternating sections */
   --c-rule:      #222a34; /* hairlines, decorative */
   --c-rule-strong: #39424f; /* stronger hairlines, decorative */
-  --c-control:   #5c6675; /* interactive borders  ~3.3:1 — WCAG 1.4.11 */
+  --c-control:   #747d8c; /* interactive borders — 3.35:1 even on the
+                             lightest surface the background gradient creates;
+                             WCAG 1.4.11 wants 3:1 */
 
   /* Text — all ≥ 6.9:1 on --c-bg */
   --c-ink:       #e8eaee; /* headings            ~16.0:1 */
@@ -113,6 +115,21 @@ html {
   }
 }
 
+/* A fixed layer behind all content: a warm lift at the top left, a cool one
+   opposite, over a vertical fall-off. Fixed rather than scrolling so the page
+   reads as one continuous surface instead of a stack of flat blocks. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 620px at 12% -8%, rgba(200, 168, 124, 0.085), transparent 62%),
+    radial-gradient(900px 520px at 88% 8%, rgba(126, 152, 190, 0.05), transparent 66%),
+    linear-gradient(180deg, #11151d 0%, #0b0e14 46%, #080a0f 100%);
+}
+
 body {
   margin: 0;
   background: var(--c-bg);
@@ -181,7 +198,7 @@ code, kbd {
 
 .section { padding-block: var(--sp-6); }
 .section--tight { padding-block: var(--sp-5); }
-.section--sand { background: var(--c-sand); }
+.section--sand { background: rgba(255, 255, 255, 0.022); }
 .section--ruled { border-top: 1px solid var(--c-rule); }
 
 @media (min-width: 48rem) {
@@ -454,7 +471,7 @@ code, kbd {
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--c-paper);
+  background: rgba(255, 255, 255, 0.028);
   border: 1px solid var(--c-rule);
   border-radius: var(--radius);
   padding: var(--sp-4);
@@ -536,7 +553,7 @@ code, kbd {
 .answer--boxed {
   border-left: 0;
   border: 1px solid var(--c-rule);
-  background: var(--c-paper);
+  background: rgba(255, 255, 255, 0.028);
   padding: var(--sp-4);
   border-radius: var(--radius);
 }
@@ -716,7 +733,7 @@ code, kbd {
 
 .cta {
   border-top: 1px solid var(--c-rule);
-  background: var(--c-sand);
+  background: rgba(255, 255, 255, 0.022);
   padding-block: var(--sp-6);
 }
 .cta__inner { max-width: 44rem; }
@@ -763,10 +780,9 @@ code, kbd {
    palette; see FlowLines.astro. Decorative only. */
 
 .flowband {
-  margin-top: var(--sp-5);
-  height: 170px;
+  margin-top: var(--sp-4);
+  height: 185px;
   overflow: hidden;
-  border-top: 1px solid var(--c-rule);
 }
 
 @media (min-width: 60rem) {
@@ -791,14 +807,19 @@ code, kbd {
     background: var(--c-gold);
     opacity: 0.85;
 
-    -webkit-mask-image: var(--flow-mask);
-    mask-image: var(--flow-mask);
-    -webkit-mask-size: cover;
-    mask-size: cover;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+    /* Two mask layers intersected: the artwork, and a vertical fade that
+       feathers the top and bottom so the band bleeds into the page rather
+       than sitting in a box. */
+    -webkit-mask-image: var(--flow-mask), linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+    mask-image: var(--flow-mask), linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+    -webkit-mask-size: cover, 100% 100%;
+    mask-size: cover, 100% 100%;
+    -webkit-mask-position: center, center;
+    mask-position: center, center;
+    -webkit-mask-repeat: no-repeat, no-repeat;
+    mask-repeat: no-repeat, no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
   }
 }
 
@@ -806,8 +827,8 @@ code, kbd {
    enough there that the extra detail is not visible anyway. */
 @media (max-width: 47.99rem) {
   .flowlines {
-    -webkit-mask-image: var(--flow-mask-sm);
-    mask-image: var(--flow-mask-sm);
+    -webkit-mask-image: var(--flow-mask-sm), linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+    mask-image: var(--flow-mask-sm), linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
   }
 }
 
@@ -833,7 +854,7 @@ code, kbd {
   top: -3rem;
   right: -4rem;
   width: min(36rem, 64%);
-  opacity: 0.72;
+  opacity: 0.28;
   -webkit-mask-image: radial-gradient(ellipse at 75% 30%, #000 25%, transparent 72%);
   mask-image: radial-gradient(ellipse at 75% 30%, #000 25%, transparent 72%);
 }
@@ -842,7 +863,7 @@ code, kbd {
   right: -2rem;
   bottom: -1rem;
   width: min(30rem, 54%);
-  opacity: 0.5;
+  opacity: 0.22;
   -webkit-mask-image: linear-gradient(to left, #000 35%, transparent 95%);
   mask-image: linear-gradient(to left, #000 35%, transparent 95%);
 }
@@ -862,14 +883,14 @@ code, kbd {
   right: 0;
   width: min(26rem, 46%);
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .art--orbit {
   top: -5rem;
   right: -6rem;
   width: min(26rem, 46%);
-  opacity: 0.6;
+  opacity: 0.26;
   -webkit-mask-image: radial-gradient(circle at 60% 40%, #000 35%, transparent 78%);
   mask-image: radial-gradient(circle at 60% 40%, #000 35%, transparent 78%);
 }
