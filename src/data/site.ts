@@ -5,11 +5,11 @@
 
 export const site = {
   name: 'Tina Williamson',
-  role: 'SEO, GEO & AI Search Strategist',
+  role: 'Senior SEO, GEO & AEO Strategist',
   shortBio:
-    'Tina Williamson is an SEO, GEO and AI search strategist who helps brands stay discoverable across traditional search engines and AI-driven answer systems.',
+    'Tina Williamson is a senior SEO, GEO and AEO strategist with ten years in search, leading organic strategy across a portfolio of 40+ client websites.',
   longBio:
-    'Tina Williamson is a search strategist working at the intersection of SEO, generative engine optimization (GEO), answer engine optimization (AEO), analytics and technical implementation. She builds search programs for large website portfolios, designs systems for measuring brand visibility inside AI answer engines, and implements the technical work herself.',
+    'Tina Williamson is a senior search strategist with ten years of experience across SEO, generative engine optimization (GEO), answer engine optimization (AEO), analytics and technical implementation. She leads organic search strategy across a portfolio of 40+ client websites, acts as the strategic partner to those clients, builds the workflows and reporting frameworks her team delivers against, and implements the technical work herself.',
   location: 'Camarillo, California — working remotely',
 
   /* --- contact ------------------------------------------------------------ */
